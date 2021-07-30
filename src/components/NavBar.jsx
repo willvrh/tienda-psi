@@ -1,5 +1,5 @@
 import React from 'react';
-import { alpha, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -10,6 +10,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
+
+import CartWidget from './CartWidget';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -137,6 +139,7 @@ export default function NavBar() {
               <ArrowDropDownIcon />
               </Button>
           </div>
+          <CartWidget/>
           <div className={classes.sectionMobile}>
             <IconButton
               aria-label="ver más"
@@ -147,6 +150,7 @@ export default function NavBar() {
             >
               <MoreIcon />
             </IconButton>
+
           </div>
         </Toolbar>
       </AppBar>
