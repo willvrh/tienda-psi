@@ -11,7 +11,8 @@ const useStyles = makeStyles((theme) => ({
     }
 ));
 
-const ItemListContainer = (props) => {
+
+export default function ItemListContainer (props) {
     const classes = useStyles();
 
     return (
@@ -24,10 +25,8 @@ const ItemListContainer = (props) => {
                 gutterBottom>
                 {props.greetings}
             </Typography>
-           
+            {props.children}
         </div>
     )
 }
-
-export default ItemListContainer;
 
