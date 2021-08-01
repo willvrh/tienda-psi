@@ -8,7 +8,7 @@ import ItemCount from './components/ItemCount';
 function App() {
 
   const onAdd = () => {
-    console.log("ONADD")
+    console.log("onAdd");
   };
 
   return (
@@ -18,7 +18,7 @@ function App() {
         <ItemCount 
           stock='5'
           initial='6'
-          onAdd={}
+          onAdd={onAdd}
         />
         </ItemListContainer>
 

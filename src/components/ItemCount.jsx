@@ -52,6 +52,12 @@ export default function ItemCount(props) {
     const [onAdd, setOnAdd] = useState(props.onAdd);
         
 
+    const addToCart = () => {
+        if (initial <= stock) {
+            onAdd();
+        }
+    }    
+
     const addOne = () => {
         if (initial < stock) {setInitial(initial+1)};
     }
@@ -106,7 +112,7 @@ export default function ItemCount(props) {
         </CardActions>
 
         <CardActions>
-            <Button fullWidth={true} size="small" color="primary" onClick={props.onAdd}>
+            <Button fullWidth={true} size="small" color="primary" onClick={addToCart}>
             Agregar al carrito
             </Button>
         </CardActions>
