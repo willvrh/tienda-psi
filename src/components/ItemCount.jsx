@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -14,7 +14,6 @@ import Grid from '@material-ui/core/Grid';
 import RemoveIcon from '@material-ui/icons/Remove';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
-import { PanToolSharp } from '@material-ui/icons';
 
 const useStyles = makeStyles ((theme) => ({
     root: {
@@ -49,12 +48,9 @@ export default function ItemCount(props) {
 
     const [initial, setInitial] = useState(getValidInitial(Number(props.initial)));
 
-    const [onAdd, setOnAdd] = useState(props.onAdd);
-        
-
     const addToCart = () => {
         if (initial <= stock) {
-            onAdd();
+            props.onAdd(initial);
         }
     }    
 

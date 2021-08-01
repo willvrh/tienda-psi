@@ -7,8 +7,8 @@ import ItemListContainer from './components/ItemListContainer';
 import ItemCount from './components/ItemCount';
 function App() {
 
-  const onAdd = () => {
-    console.log("onAdd");
+  function onAdd(qty){
+    alert("onAdd "+qty);
   };
 
   return (
