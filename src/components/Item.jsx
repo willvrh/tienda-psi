@@ -38,13 +38,11 @@ export default function Item({id, title, description, price, pictureUrl}) {
                             />
                             <CardContent>
                                 <div className={classes.cardContent}>
-                                    <Typography gutterBottom variant="h5" >
+                                    <Typography gutterBottom variant="h6" >
                                         {title}
                                     </Typography>
-                                    <Typography gutterBottom variant="h5" >
-                                        {description}
-                                    </Typography>
-                                    <Typography gutterBottom variant="h5" >
+           
+                                    <Typography gutterBottom variant="button" >
                                         $ {price}
                                     </Typography>
                                 </div>

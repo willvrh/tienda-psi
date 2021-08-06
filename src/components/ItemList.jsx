@@ -39,62 +39,62 @@ export default function ItemList(props) {
                 },
                 {
                     id: "2",
-                    name: "Gestión de flotas",
+                    title: "Gestión de flotas",
                     description: "Sistema de gestión para mantenimiento de vehículos",
                     price: "10500",
                     image: 'mant.jpg',
                 },
                 {
                     id: "3",
-                    name: "Gestión de mensajerías",
+                    title: "Gestión de mensajerías",
                     description: "Sistema de gestión para motomensajerías y logística",
                     price: "10500",
                     image: 'mens.jpg',
                 },
                 {
                     id: "4",
-                    name: "Gestión de peluquerías",
+                    title: "Gestión de peluquerías",
                     description: "Sistema de gestión para peluquerías y salones de belleza",
                     price: "10500",
                     image: 'pelu.jpg',
                 },
                 {
                     id: "5",
-                    name: "Gestión de PetShop",
+                    title: "Gestión de PetShop",
                     description: "Sistema de gestión para petshop y peluquería canina",
                     price: "10500",
                     image: 'pet.jpg',
                 },
                 {
                     id: "6",
-                    name: "Gestión de gestorías",
+                    title: "Gestión de gestorías",
                     description: "Sistema de gestión para gestorías",
                     price: "10500",
                     image: 'pgestion.jpg',
                 },
                 {
                     id: "7",
-                    name: "Gestión de préstamos",
+                    title: "Gestión de préstamos",
                     description: "Sistema de gestión para prestamistas y financieras",
                     price: "10500",
                     image: 'prest.jpg',
                 },
                 {
                     id: "8",
-                    name: "Presupuestos y remitos",
+                    title: "Presupuestos y remitos",
                     description: "Sistema simple para generar presupuestos y remitos personalizados",
                     price: "3600",
                     image: 'presu.jpg',
                 },
                 {
                     id: "9",
-                    name: "Prontas Ventas",
+                    title: "Prontas Ventas",
                     description: "Punto de venta multi rubro para gestionar comercios",
                     price: "5900",
                     image: 'pventas.jpg',
                 },
             ];
-            setTimeout(() => resolve(data), 2000);
+            setTimeout(() => resolve(data), 0);
         })
             .then((dataResolve) => {
                 setItems(dataResolve);
@@ -110,13 +110,10 @@ export default function ItemList(props) {
     return (
         <>
             <Grid className={classes.root} container spacing={3}>
-                <Item/>
-                <Item/>
-                <Item/>
-                <Item/>
-                <Item/>
-                <Item/>
-                <Item/>
+            {items.map((item) =>
+                    (<Item {...item} 
+                  />)
+                )}
             </Grid>
         </>
         
