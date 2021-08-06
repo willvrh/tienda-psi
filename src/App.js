@@ -17,7 +17,7 @@ function App() {
         <ItemListContainer greetings="Bienvenido a la tienda!">
         <ItemCount 
           stock='5'
-          initial='6'
+          initial='1'
           onAdd={onAdd}
         />
         </ItemListContainer>
