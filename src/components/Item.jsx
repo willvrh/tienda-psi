@@ -60,7 +60,7 @@ export default function Item({id, title, description, price, pictureUrl}) {
                                 <div className={classes.cardContent}>
                                     
                                     <Typography gutterBottom variant="h5" >
-                                        $ {Number(price).toLocaleString()}
+                                        $ {Number(price).toLocaleString('es-AR')}
                                         <Typography className={classes.idText}>#{id}</Typography>
                                     </Typography>
                                     
