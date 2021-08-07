@@ -30,6 +30,11 @@ const useStyles = makeStyles({
         overflow: "hidden",
         fontWeight: '500',
         color: 'rgba(0,0,0,.6)'
+    },
+    idText: {
+        float: 'right',
+        fontWeight: '500',
+        color: 'rgba(0,0,0,.3)'
     }
 });
 
@@ -56,8 +61,9 @@ export default function Item({id, title, description, price, pictureUrl}) {
                                     
                                     <Typography gutterBottom variant="h5" >
                                         $ {Number(price).toLocaleString()}
+                                        <Typography className={classes.idText}>#{id}</Typography>
                                     </Typography>
-
+                                    
                                     
                                     <Typography className={classes.cardTitle} noWrap gutterBottom variant="body2">
                                         {title}
@@ -67,18 +73,13 @@ export default function Item({id, title, description, price, pictureUrl}) {
                                 </div>
 
                                 <Box
-                                component="div"
-                                className={classes.descriptionBox}
-                                sx={{ typography: 'body2' }}
-                                >
-                                {description}
+                                    component="div"
+                                    className={classes.descriptionBox}>
+                                    {description}
                                 </Box>
                                 
                             </CardContent>
                         </CardActionArea>
-                        <CardActions disableSpacing className={classes.cardActions}>
-                            <Typography>#{id}</Typography>
-                        </CardActions>
                     </Card>
                 </Box>
             </Grid >
