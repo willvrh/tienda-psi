@@ -103,7 +103,7 @@ export default function ItemList(props) {
                     pictureUrl: 'pventas.jpg',
                 },
             ];
-            setTimeout(() => resolve(data), 2000);
+            setTimeout(() => resolve(data), 0);
         })
             .then((dataResolve) => {
                 setItems(dataResolve);
