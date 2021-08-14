@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Card, CardActionArea, CardActions, CardContent, CardMedia, Typography, Grid, Box, makeStyles } from '@material-ui/core';
-
+import React from 'react';
+import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid, Box, makeStyles } from '@material-ui/core';
+import ItemCount from './ItemCount';
 const useStyles = makeStyles({
     root: {
         // maxWidth: 345, original width style
@@ -80,6 +80,7 @@ export default function Item({id, title, description, price, pictureUrl}) {
                                 
                             </CardContent>
                         </CardActionArea>
+                            <ItemCount initial='1' stock='5'/>
                     </Card>
                 </Box>
             </Grid >
