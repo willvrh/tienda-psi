@@ -5,6 +5,8 @@ import Container from '@material-ui/core/Container';
 import NavBar from './components/NavBar';
 import ItemListContainer from './components/ItemListContainer';
 import ItemList from './components/ItemList';
+import ItemDetailContainer from './components/ItemDetailContainer';
+import ItemDetail from './components/ItemDetail';
 
 
 function App() {
@@ -16,10 +18,11 @@ function App() {
   return (
       <Container disableGutters={true} maxWidth='xl'>
         <NavBar/>
-        <ItemListContainer greetings="Bienvenido a la tienda!">
+        <ItemDetailContainer/>
+        {/* <ItemListContainer greetings="Bienvenido a la tienda!">
           <ItemList/>
-        </ItemListContainer>
-      </Container>
+        </ItemListContainer>*/}
+  </Container>
   );
 }
 

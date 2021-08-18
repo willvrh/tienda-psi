@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ButtonGroup, Card,  CardContent, Button, Typography, Paper, makeStyles } from '@material-ui/core';
+import { ButtonGroup, Button, Typography, Paper, makeStyles } from '@material-ui/core';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 
@@ -17,6 +17,7 @@ export default function ItemCount(props) {
     const classes = useStyles();
 
     const [stock, setStock] = useState(Number(props.stock));
+
     const getValidInitial = (value) => {
         let validInitial = 0;
         return value < stock ? validInitial = value : validInitial = stock;
@@ -40,41 +41,38 @@ export default function ItemCount(props) {
 
     
   return (
-    <Card className={classes.root}>
-        <CardContent>
-                <ButtonGroup className={classes.buttons} fullWidth size="small" aria-label="large outlined primary button group">
+        <>
+            <ButtonGroup className={classes.buttons} fullWidth size="small" aria-label="large outlined primary button group">
 
 
 
-                    <Button
-                        aria-label="reduce"
-                        color="primary"
-                        onClick={() => {
-                            substractOne();
-                        }}
-                    >
-                        <RemoveIcon fontSize="small" />
-                    </Button>
-                    <Paper className={classes.buttons}>
-                        <Typography variant="button" >
-                            {initial}
-                        </Typography>
-                    </Paper>
-                    <Button
-                        aria-label="increase"
-                        color="primary"
-                        onClick={() => {
-                            addOne();
-                        }}
-                    >
-                        <AddIcon fontSize="small" />
-                    </Button>
-                </ButtonGroup>
-            <Button style={{marginTop: '8px'}}fullWidth variant="outlined" onClick={() => addToCart()}>
+                <Button
+                    aria-label="reduce"
+                    color="primary"
+                    onClick={() => {
+                        substractOne();
+                    }}
+                >
+                    <RemoveIcon fontSize="small" />
+                </Button>
+                <Paper className={classes.buttons}>
+                    <Typography variant="button" >
+                        {initial}
+                    </Typography>
+                </Paper>
+                <Button
+                    aria-label="increase"
+                    color="primary"
+                    onClick={() => {
+                        addOne();
+                    }}
+                >
+                    <AddIcon fontSize="small" />
+                </Button>
+            </ButtonGroup>
+            <Button style={{marginTop: '8px'}} fullWidth variant="outlined" onClick={() => addToCart()}>
                 Agregar al Carrito
             </Button>
-        </CardContent>
-
-    </Card >
+         </>
 );
 }

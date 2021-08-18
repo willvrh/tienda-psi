@@ -80,7 +80,17 @@ export default function Item({id, title, description, price, pictureUrl}) {
                                 
                             </CardContent>
                         </CardActionArea>
-                            <ItemCount initial='1' stock='5'/>
+
+
+                        <Card className={classes.root}>
+                            <CardContent>
+                                <ItemCount initial='1' stock='5'/>
+                            </CardContent>
+                        </Card>
+
+
+
+                            
                     </Card>
                 </Box>
             </Grid >

@@ -4,7 +4,8 @@ const mockData = [
         title: "Gestión de remiserías",
         description: "Sistema de gestión para remiserías",
         price: "10500",
-        pictureUrl: 'agencia.jpg'
+        pictureUrl: 'agencia.jpg',
+        stock: 5,
     },
     {
         id: "2",
@@ -12,6 +13,7 @@ const mockData = [
         description: "Sistema de gestión para mantenimiento de vehículos",
         price: "10500",
         pictureUrl: 'mant.jpg',
+        stock: 5,
     },
     {
         id: "3",
@@ -19,6 +21,7 @@ const mockData = [
         description: "Sistema de gestión para motomensajerías y logística",
         price: "10500",
         pictureUrl: 'mens.jpg',
+        stock: 5,
     },
     {
         id: "4",
@@ -26,6 +29,7 @@ const mockData = [
         description: "Sistema de gestión para peluquerías y salones de belleza",
         price: "10500",
         pictureUrl: 'pelu.jpg',
+        stock: 5,
     },
     {
         id: "5",
@@ -33,6 +37,7 @@ const mockData = [
         description: "Sistema de gestión para petshop y peluquería canina",
         price: "10500",
         pictureUrl: 'pet.jpg',
+        stock: 5,
     },
     {
         id: "6",
@@ -40,6 +45,7 @@ const mockData = [
         description: "Sistema de gestión para gestorías",
         price: "10500",
         pictureUrl: 'pgestion.jpg',
+        stock: 5,
     },
     {
         id: "7",
@@ -47,6 +53,7 @@ const mockData = [
         description: "Sistema de gestión para prestamistas y financieras",
         price: "10500",
         pictureUrl: 'prest.jpg',
+        stock: 5,
     },
     {
         id: "8",
@@ -54,6 +61,7 @@ const mockData = [
         description: "Sistema simple para generar presupuestos y remitos personalizados",
         price: "3600",
         pictureUrl: 'presu.jpg',
+        stock: 5,
     },
     {
         id: "9",
@@ -61,6 +69,7 @@ const mockData = [
         description: "Punto de venta multi rubro para gestionar comercios",
         price: "5900",
         pictureUrl: 'pventas.jpg',
+        stock: 5,
     },
 ];
 
