@@ -80,6 +80,15 @@ const mockData = [
         stock: 5,
         category: "escritorio",
     },
+    {
+        id: "10",
+        title: "Carta QR",
+        description: "Carta digital para comercios gastronómicos",
+        price: "1800",
+        pictureUrl: '/resources/images/pventas.jpg',
+        stock: 5,
+        category: "web",
+    },
 ];
 
 export { mockData };

@@ -82,6 +82,10 @@ export default function NavBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
+      <Link to={`/category/todas`} style={{ textDecoration: 'none', color: 'black', }}>
+        <MenuItem onClick={handleMenuClose}>Todas</MenuItem>
+      </Link>
+
       <Link to={`/category/web`} style={{ textDecoration: 'none', color: 'black', }}>
         <MenuItem onClick={handleMenuClose}>Sistemas WEB</MenuItem>
       </Link>

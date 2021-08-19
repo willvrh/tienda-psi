@@ -3,10 +3,10 @@ import Item from './Item';
 import { makeStyles, CircularProgress, Typography, Grid } from '@material-ui/core';
 import { mockData } from '../MockData';
 
-export default function ItemList(props) {
+export default function ItemList({category}) {
 
-    const [category, setCategory] = useState(props.category);
-    console.log("prop", props.category)
+    const [cat, setCategory] = useState(category);
+    console.log("prop", category)
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -36,12 +36,12 @@ export default function ItemList(props) {
         new Promise((resolve, reject) => {
             setLoading(true);
             var data = mockData;
-            if (category != "") {
+            if (cat != "" && cat != "todas") {
                 data = mockData.filter(product => {
-                    return product.category == category;
+                    return product.category == cat;
                 })
             }
-            console.log("cat", category)
+            console.log("cat", cat)
             
 
             setTimeout(() => resolve(data), 2000);
@@ -54,6 +54,7 @@ export default function ItemList(props) {
                 console.log("err", error);
         });
     }, []);
+
 
     if (loading) {
         return (
