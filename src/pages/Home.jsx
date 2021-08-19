@@ -6,7 +6,7 @@ export default function Home() {
     return (
         <>
             <ItemListContainer>
-                <ItemList/>
+                <ItemList category=""/>
             </ItemListContainer>
         </>
     );

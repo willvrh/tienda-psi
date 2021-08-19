@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ItemDetailContainer (props) {
     const classes = useStyles();
+    
     const itemId = props.id;
     const [item, setItem] = useState({});
     const [loading, setLoading] = useState(false);

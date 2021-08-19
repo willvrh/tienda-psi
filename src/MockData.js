@@ -49,7 +49,7 @@ const mockData = [
         title: "Gestión de gestorías",
         description: "Sistema de gestión para gestorías",
         price: "10500",
-        pictureUrl: 'resources/images/pgestion.jpg',
+        pictureUrl: '/resources/images/pgestion.jpg',
         stock: 5,
         category: "escritorio",
     },

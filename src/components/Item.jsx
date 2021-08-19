@@ -40,7 +40,7 @@ const useStyles = makeStyles({
     }
 });
 
-export default function Item({id, title, description, price, pictureUrl}) {
+export default function Item({id, title, description, price, pictureUrl, category}) {
 
     const classes = useStyles();
     
@@ -50,7 +50,7 @@ export default function Item({id, title, description, price, pictureUrl}) {
                 <Box boxShadow={3} item xs={12} sm={6} md={2}>
                     
                     <Card className={classes.root}>
-                        <Link to={`/item/${id}`} style={{ textDecoration: 'none', color: 'black', }}>
+                        <Link to={`/item/${id}/${category}`} style={{ textDecoration: 'none', color: 'black', }}>
                         <CardActionArea>
                             <CardMedia
                                 className={classes.media}

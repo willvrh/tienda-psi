@@ -5,6 +5,8 @@ import { mockData } from '../MockData';
 
 export default function ItemList(props) {
 
+    const [category, setCategory] = useState(props.category);
+    console.log("prop", props.category)
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -33,7 +35,15 @@ export default function ItemList(props) {
     useEffect(() => {
         new Promise((resolve, reject) => {
             setLoading(true);
-            const data = mockData;
+            var data = mockData;
+            if (category != "") {
+                data = mockData.filter(product => {
+                    return product.category == category;
+                })
+            }
+            console.log("cat", category)
+            
+
             setTimeout(() => resolve(data), 2000);
         })
         .then((dataResolve) => {
@@ -44,7 +54,6 @@ export default function ItemList(props) {
                 console.log("err", error);
         });
     }, []);
-
 
     if (loading) {
         return (

@@ -82,8 +82,13 @@ export default function NavBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Sistemas WEB</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Sistemas de escritorio</MenuItem>
+      <Link to={`/category/web`} style={{ textDecoration: 'none', color: 'black', }}>
+        <MenuItem onClick={handleMenuClose}>Sistemas WEB</MenuItem>
+      </Link>
+      
+      <Link to={`/category/escritorio`} style={{ textDecoration: 'none', color: 'black', }}>
+        <MenuItem onClick={handleMenuClose}>Sistemas de escritorio</MenuItem>
+      </Link>
     </Menu>
   );
 
