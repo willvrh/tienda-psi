@@ -3,26 +3,35 @@ import './components/NavBar';
 import '@fontsource/roboto';
 import Container from '@material-ui/core/Container';
 import NavBar from './components/NavBar';
-import ItemListContainer from './components/ItemListContainer';
-import ItemList from './components/ItemList';
-import ItemDetailContainer from './components/ItemDetailContainer';
-import ItemDetail from './components/ItemDetail';
 
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+import Home from './pages/Home';
+import Category from './pages/Category';
+import Product from './pages/Product';
 
 function App() {
 
-  function onAdd(qty){
-    alert("onAdd "+qty);
-  };
-
   return (
       <Container disableGutters={true} maxWidth='xl'>
+        <BrowserRouter>
         <NavBar/>
-        <ItemDetailContainer/>
-        {/* <ItemListContainer greetings="Bienvenido a la tienda!">
-          <ItemList/>
-        </ItemListContainer>*/}
-  </Container>
+        <Switch>
+          <Route exact path="/">
+            <Home/>
+          </Route>
+          <Route exact path="/category/:id">
+            <Category/>
+          </Route>
+          <Route exact path="/item/:id">
+            <Product/>
+          </Route>
+
+        </Switch>
+        
+        
+        </BrowserRouter>
+     </Container>
   );
 }
 

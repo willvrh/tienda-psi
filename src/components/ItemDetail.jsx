@@ -11,13 +11,10 @@ const useStyles = makeStyles({
         flexDirection: "column"
     },
     media: {
+        width: '100%',
         paddingTop: '56.25%', // 16:9
     },
-    content: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        flexDirection: 'column',
-    },
+
     price: {
         fontWeight: '600',
     },

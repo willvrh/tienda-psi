@@ -1,6 +1,8 @@
 import React from 'react';
 import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid, Box, makeStyles } from '@material-ui/core';
 import ItemCount from './ItemCount';
+import { Link } from 'react-router-dom';
+
 const useStyles = makeStyles({
     root: {
         // maxWidth: 345, original width style
@@ -42,18 +44,19 @@ export default function Item({id, title, description, price, pictureUrl}) {
 
     const classes = useStyles();
     
-    const finalPictureUrl = '/resources/images/'+pictureUrl;
 
     return (
         <Grid item xs={12} sm={6} md={2} >
                 <Box boxShadow={3} item xs={12} sm={6} md={2}>
+                    
                     <Card className={classes.root}>
+                        <Link to={`/item/${id}`} style={{ textDecoration: 'none', color: 'black', }}>
                         <CardActionArea>
                             <CardMedia
                                 className={classes.media}
                                 component="img"
                                 alt="No Image"
-                                image={finalPictureUrl}
+                                image={pictureUrl}
                                 title="No Image"
                             />
                             <CardContent>
@@ -80,7 +83,7 @@ export default function Item({id, title, description, price, pictureUrl}) {
                                 
                             </CardContent>
                         </CardActionArea>
-
+                        </Link>
 
                         <Card className={classes.root}>
                             <CardContent>
@@ -92,6 +95,7 @@ export default function Item({id, title, description, price, pictureUrl}) {
 
                             
                     </Card>
+                    
                 </Box>
             </Grid >
     );

@@ -13,6 +13,8 @@ import Button from '@material-ui/core/Button';
 
 import CartWidget from './CartWidget';
 
+import { Link } from 'react-router-dom';
+
 const useStyles = makeStyles((theme) => ({
   appBar: {
     background : '#2E3B55',
@@ -124,9 +126,11 @@ export default function NavBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            ProntasApps
-          </Typography>
+          <Link to="/" style={{ textDecoration: 'none', color: 'white', }}>
+            <Typography className={classes.title} variant="h6" noWrap>
+              ProntasApps
+            </Typography>
+          </Link>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <Button edge="end"
