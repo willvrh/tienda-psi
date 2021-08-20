@@ -35,14 +35,11 @@ export default function ItemDetailContainer (props) {
     const getItems = () => {
         new Promise((resolve, reject) => {
             setLoading(true);
-            const item = mockData.filter(product => {
-                return product.id === itemId;
-              })[0]
-
-            setTimeout(() => resolve(item), 2000);
+            setTimeout(() => resolve(mockData.find(product => product.id === itemId)), 2000);
         })
-        .then((dataResolve) => {
-            setItem(dataResolve);
+        .then((itemResponse) => {
+            console.log("item", itemResponse);
+            setItem(itemResponse);
             setLoading(false);
         })
         .catch((error) => {
