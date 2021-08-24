@@ -6,7 +6,6 @@ import { useLocation } from "react-router";
 
 export default function ItemList({category}) {
 
-    const [cat, setCategory] = useState("");
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(false);
     const location = useLocation();
@@ -37,11 +36,11 @@ export default function ItemList({category}) {
     useEffect(() => {
         new Promise((resolve, reject) => {
             setLoading(true);
-            setCategory(category)
             var data = mockDataProducts;
-            if (cat != "" && cat != "todas") {
+
+            if (category != "" && category != "todas") {
                 data = mockDataProducts.filter(product => {
-                    return product.category != cat;
+                    return product.category == category;
                 })
             }
 
