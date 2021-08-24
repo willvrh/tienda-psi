@@ -21,10 +21,16 @@ function App() {
         <Breadcrumb/>
         <Switch>
             
-          <Route exact path="/" render={(props) => <Home key={Date.now()}/>} />
-          <Route exact path="/category/:id" render={(props) => <Category key={Date.now()}/>}/>
-          <Route exact path="/item/:id/:category" render={(props) => <Product key={Date.now()}/>}/>
-
+          <Route exact path="/">
+          <Home/>
+          </Route>
+          <Route exact path="/category/:id">
+          <Category/>
+          </Route>
+          <Route exact path="/item/:id/:category" >
+          <Product/>
+          </Route>
+         
         </Switch>
         
         

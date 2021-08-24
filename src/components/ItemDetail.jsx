@@ -11,8 +11,6 @@ const useStyles = makeStyles({
         flexDirection: "column"
     },
     media: {
-        width: '100%',
-        paddingTop: '56.25%', // 16:9
     },
 
     price: {
@@ -40,13 +38,8 @@ export default function ItemDetail(props) {
 
     return (
         <Grid container spacing={3}  className={classes.root}>
-            <Grid item lg={8} md={8} xs={12}>
-                
-                <CardMedia
-                    className={classes.media}
-                    image={item.pictureUrl}
-                    title="Imagen del producto"
-                />
+            <Grid item lg={8} md={8} xs={12} style={{textAlign: "center"}}>
+                <img style={{maxHeight: '300px', width: 'auto'}} src={item.pictureUrl}></img>
             </Grid>
             <Grid item lg={4} md={4} xs={12}>
                 <div className={classes.content}>

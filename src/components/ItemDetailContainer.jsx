@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, makeStyles, Box, Typography, CircularProgress } from '@material-ui/core';
 import ItemDetail from './ItemDetail';
 import { useState, useEffect } from 'react';
-import { mockData } from '../MockData';
+import { mockDataProducts } from '../MockData';
 
 const useStyles = makeStyles((theme) => ({
     containerBg: {
@@ -35,10 +35,9 @@ export default function ItemDetailContainer (props) {
     const getItems = () => {
         new Promise((resolve, reject) => {
             setLoading(true);
-            setTimeout(() => resolve(mockData.find(product => product.id === itemId)), 2000);
+            setTimeout(() => resolve(mockDataProducts.find(product => product.id === itemId)), 2000);
         })
         .then((itemResponse) => {
-            console.log("item", itemResponse);
             setItem(itemResponse);
             setLoading(false);
         })

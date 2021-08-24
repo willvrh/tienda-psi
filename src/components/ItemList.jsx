@@ -1,14 +1,16 @@
 import { React, useEffect, useState } from 'react';
 import Item from './Item';
 import { makeStyles, CircularProgress, Typography, Grid } from '@material-ui/core';
-import { mockData } from '../MockData';
+import { mockDataProducts } from '../MockData';
+import { useLocation } from "react-router";
 
 export default function ItemList({category}) {
 
-    const [cat, setCategory] = useState(category);
-    console.log("prop", category)
+    const [cat, setCategory] = useState("");
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(false);
+    const location = useLocation();
+
 
     const useStyles = makeStyles({
         root: {
@@ -35,14 +37,13 @@ export default function ItemList({category}) {
     useEffect(() => {
         new Promise((resolve, reject) => {
             setLoading(true);
-            var data = mockData;
+            setCategory(category)
+            var data = mockDataProducts;
             if (cat != "" && cat != "todas") {
-                data = mockData.filter(product => {
-                    return product.category == cat;
+                data = mockDataProducts.filter(product => {
+                    return product.category != cat;
                 })
             }
-            console.log("cat", cat)
-            
 
             setTimeout(() => resolve(data), 2000);
         })
@@ -53,7 +54,7 @@ export default function ItemList({category}) {
         .catch((error) => {
                 console.log("err", error);
         });
-    }, []);
+    }, [location.pathname]);
 
 
     if (loading) {

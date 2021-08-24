@@ -6,12 +6,14 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
+import HomeIcon from '@material-ui/icons/Home';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
 
 import CartWidget from './CartWidget';
+
+import { mockDataCategories } from '../MockData';
 
 import { Link } from 'react-router-dom';
 
@@ -86,13 +88,15 @@ export default function NavBar() {
         <MenuItem onClick={handleMenuClose}>Todas</MenuItem>
       </Link>
 
-      <Link to={`/category/web`} style={{ textDecoration: 'none', color: 'black', }}>
-        <MenuItem onClick={handleMenuClose}>Sistemas WEB</MenuItem>
+      {mockDataCategories.map((category) => (
+      <>
+      <Link to={`/category/${category.shortname}`} style={{ textDecoration: 'none', color: 'black', }}>
+        <MenuItem onClick={handleMenuClose}>{category.name}</MenuItem>
       </Link>
-      
-      <Link to={`/category/escritorio`} style={{ textDecoration: 'none', color: 'black', }}>
-        <MenuItem onClick={handleMenuClose}>Sistemas de escritorio</MenuItem>
-      </Link>
+      </>
+      ) )}
+
+    
     </Menu>
   );
 
@@ -127,14 +131,16 @@ export default function NavBar() {
         className={classes.appBar}
         position="static">
         <Toolbar>
+        <Link to="/" style={{ textDecoration: 'none', color: 'white', }}>
           <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
-            aria-label="abrir sidebar"
+            aria-label="ir a home"
           >
-            <MenuIcon />
+            <HomeIcon />
           </IconButton>
+          </Link>
           <Link to="/" style={{ textDecoration: 'none', color: 'white', }}>
             <Typography className={classes.title} variant="h6" noWrap>
               ProntasApps

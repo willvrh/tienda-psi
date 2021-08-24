@@ -1,4 +1,4 @@
-const mockData = [
+const mockDataProducts = [
     {
         id: "1",
         title: "Gestión de remiserías",
@@ -91,4 +91,18 @@ const mockData = [
     },
 ];
 
-export { mockData };
+const mockDataCategories = [
+    {
+        name: "Sistemas WEB",
+        shortname: "web",
+        description: "Sistemas para usarse online desde un navegador web",
+    },
+    {
+        name: "Sistemas de escritorio",
+        shortname: "escritorio",
+        description: "Sistemas para utilizarse en una pc sin conexión a internet",
+    },
+];
+
+
+export { mockDataProducts, mockDataCategories };
