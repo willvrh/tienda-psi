@@ -36,6 +36,10 @@ export default function ItemDetail(props) {
     const classes = useStyles();
     const item = props.item;
 
+    const onAdd = (initial) => {
+        alert("ADD ITEM "+initial)
+    }
+
     return (
         <Grid container spacing={3}  className={classes.root}>
             <Grid item lg={8} md={8} xs={12} style={{textAlign: "center"}}>
@@ -63,7 +67,7 @@ export default function ItemDetail(props) {
                         
                     </Box>    
                     <br/>
-                    <ItemCount mt={3} initial='1' stock={item.stock}/>
+                    <ItemCount mt={3} initial='1' stock={item.stock} onAdd={onAdd}/>
                      
                 </div>
             </Grid>

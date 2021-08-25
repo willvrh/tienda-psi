@@ -46,6 +46,9 @@ export default function Item({id, title, description, price, pictureUrl, categor
 
     const classes = useStyles();
     
+    const onAdd = (initial) => {
+        alert("ADD ITEM "+initial)
+    }
 
     return (
         <Grid item xs={12} sm={6} md={2} >
@@ -89,7 +92,7 @@ export default function Item({id, title, description, price, pictureUrl, categor
 
                         <Card className={classes.root}>
                             <CardContent>
-                                <ItemCount initial='1' stock='5'/>
+                                <ItemCount initial='1' stock='5' onAdd={onAdd}/>
                             </CardContent>
                         </Card>
 
