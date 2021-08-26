@@ -14,6 +14,7 @@ const useStyles = makeStyles({
     },
 
     price: {
+        fontSize: '1.2em',
         fontWeight: '600',
     },
     description: {
@@ -24,6 +25,16 @@ const useStyles = makeStyles({
         overflow: "hidden",
         fontWeight: '500',
         color: 'rgba(0,0,0,.6)'
+    },
+    category: {
+        display: "-webkit-box",
+        boxOrient: "vertical",
+        wordBreak: "normal",
+        overflow: "hidden",
+        textTransform: 'uppercase',
+        fontWeight: '700',
+        paddingBottom: '15px',
+        color: 'rgba(0,0,0,.4)'
     },
     idText: {
         float: 'right',
@@ -52,7 +63,15 @@ export default function ItemDetail(props) {
                         {item.title}
                         <Typography className={classes.idText}>#{item.id}</Typography>
                     </Typography>
-                    
+                    <Box
+                        component="div"
+                        className={classes.category}>
+                            <Typography className={classes.category} noWrap gutterBottom variant="body2">
+                            ~ {item.category}
+                    </Typography>
+                        
+                    </Box>    
+
                     
                     <Typography className={classes.price} noWrap gutterBottom variant="body2">
                         $ {Number(item.price).toLocaleString('es-AR')}

@@ -9,6 +9,8 @@ const useStyles = makeStyles({
     root: {
         // maxWidth: 345, original width style
         maxWidth: '100%',
+        transition: "transform 0.15s ease-in-out",
+        "&:hover": { transform: "scale3d(1.05, 1.05, 1)" },
     },
     media: {
         height: '100%',
@@ -35,6 +37,17 @@ const useStyles = makeStyles({
         fontWeight: '500',
         color: 'rgba(0,0,0,.6)'
     },
+    categoryBox: {
+        display: "-webkit-box",
+        boxOrient: "vertical",
+        wordBreak: "normal",
+        overflow: "hidden",
+        fontWeight: '700',
+        textTransform: 'uppercase',
+        paddingBottom: '10px',
+        fontSize: '0.7em',
+        color: 'rgba(0,0,0,.4)'
+    },
     idText: {
         float: 'right',
         fontWeight: '500',
@@ -46,10 +59,6 @@ export default function Item({id, title, description, price, pictureUrl, categor
 
     const classes = useStyles();
     
-    const onAdd = (initial) => {
-        alert("ADD ITEM "+initial)
-    }
-
     return (
         <Grid item xs={12} sm={6} md={2} >
                 <Box boxShadow={3} item xs={12} sm={6} md={2}>
@@ -82,6 +91,12 @@ export default function Item({id, title, description, price, pictureUrl, categor
 
                                 <Box
                                     component="div"
+                                    className={classes.categoryBox}>
+                                    ~ {category}
+                                </Box>
+
+                                <Box
+                                    component="div"
                                     className={classes.descriptionBox}>
                                     {description}
                                 </Box>
@@ -90,13 +105,7 @@ export default function Item({id, title, description, price, pictureUrl, categor
                         </CardActionArea>
                         </Link>
 
-                        <Card className={classes.root}>
-                            <CardContent>
-                                <ItemCount initial='1' stock='5' onAdd={onAdd}/>
-                            </CardContent>
-                        </Card>
-
-
+                        
 
                             
                     </Card>
