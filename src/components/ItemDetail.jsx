@@ -1,5 +1,6 @@
-import React from "react";
-import { makeStyles, Box, Typography, Grid, CardMedia } from "@material-ui/core";
+import {ReactChild, useEffect, useState} from "react";
+import { Link } from 'react-router-dom';
+import { makeStyles, Box, Typography, Grid, Button} from "@material-ui/core";
 import ItemCount from "./ItemCount";
 
 const useStyles = makeStyles({
@@ -47,8 +48,17 @@ export default function ItemDetail(props) {
     const classes = useStyles();
     const item = props.item;
 
-    const onAdd = (initial) => {
-        alert("ADD ITEM "+initial)
+    const [itemQuantity, setQuantity] = useState(0);
+    const [finish, setFinish] = useState(false);
+
+    useEffect(() => {
+        itemQuantity > 0 ? setFinish(true) : setFinish(false);
+    }, [itemQuantity]);
+
+    const onAdd = (qty) => {
+        if (qty<=item.stock) {
+            setQuantity(qty)
+        }
     }
 
     return (
@@ -86,8 +96,16 @@ export default function ItemDetail(props) {
                         
                     </Box>    
                     <br/>
-                    <ItemCount mt={3} initial='1' stock={item.stock} onAdd={onAdd}/>
-                     
+                    
+                    { !finish && ( <ItemCount mt={3} initial='1' stock={item.stock} onAdd={onAdd}/> ) }
+                    
+                    { finish && (
+                    <Link to={`/cart`} style={{ textDecoration: 'none', color: 'black', }}>
+                        <Button style={{marginTop: '8px'}} fullWidth variant="outlined">
+                         Terminar compra
+                        </Button>
+                    </Link>)
+                    }
                 </div>
             </Grid>
             </Grid>

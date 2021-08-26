@@ -26,7 +26,8 @@ const useStyles = makeStyles({
         flexDirection: 'column',
     },
     cardTitle: {
-        fontWeight: '600',
+        fontSize: '1em',
+        fontWeight: '550',
     },
     descriptionBox: {
         display: "-webkit-box",
@@ -50,8 +51,13 @@ const useStyles = makeStyles({
     },
     idText: {
         float: 'right',
+        fontSize: '0.8em',
         fontWeight: '500',
         color: 'rgba(0,0,0,.3)'
+    },
+    priceText: {
+        fontWeight: '700',
+        fontSize: '1.2em',
     }
 });
 
@@ -64,19 +70,19 @@ export default function Item({id, title, description, price, pictureUrl, categor
                 <Box boxShadow={3} item xs={12} sm={6} md={2}>
                     
                     <Card className={classes.root}>
-                        <Link to={`/item/${id}/${category}`} style={{ textDecoration: 'none', color: 'black', }}>
+                        <Link title={title} to={`/item/${id}/${category}`} style={{ textDecoration: 'none', color: 'black', }}>
                         <CardActionArea>
                             <CardMedia
                                 className={classes.media}
                                 component="img"
-                                alt="No Image"
+                                alt={title} 
                                 image={pictureUrl}
-                                title="No Image"
+                                title={title} 
                             />
                             <CardContent>
                                 <div className={classes.cardContent}>
                                     
-                                    <Typography gutterBottom variant="h5" >
+                                    <Typography className={classes.priceText} gutterBottom variant="h5" >
                                         $ {Number(price).toLocaleString('es-AR')}
                                         <Typography className={classes.idText}>#{id}</Typography>
                                     </Typography>

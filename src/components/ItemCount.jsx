@@ -25,12 +25,6 @@ export default function ItemCount(props) {
 
     const [initial, setInitial] = useState(getValidInitial(Number(props.initial)));
 
-    const addToCart = () => {
-        if (initial <= stock) {
-            props.onAdd(initial);
-        }
-    }    
-
     const addOne = () => {
         if (initial < stock) {setInitial(initial+1)};
     }
@@ -70,7 +64,7 @@ export default function ItemCount(props) {
                     <AddIcon fontSize="small" />
                 </Button>
             </ButtonGroup>
-            <Button style={{marginTop: '8px'}} fullWidth variant="outlined" onClick={() => addToCart()}>
+            <Button style={{marginTop: '8px'}} fullWidth variant="outlined" onClick={() => props.onAdd(initial)}>
                 Agregar al Carrito
             </Button>
          </>
