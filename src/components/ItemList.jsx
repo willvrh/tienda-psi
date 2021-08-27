@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from 'react';
 import Item from './Item';
-import { makeStyles, CircularProgress, Typography, Grid } from '@material-ui/core';
+import { makeStyles, Grid, Box } from '@material-ui/core';
 import { mockDataProducts } from '../MockData';
 import { useLocation } from "react-router";
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -58,7 +58,9 @@ export default function ItemList({category}) {
                 {new Array(12).fill(1).map((item) => (
                 <>
                 <Grid item xs={12} sm={6} md={2} >
-                <Skeleton variant="rect" width={200} height={340} />
+                <Box boxShadow={3} item xs={12} sm={6} md={2}>
+                <Skeleton variant="rect" height={350} />
+                </Box>
                 </Grid>
                 </>
                 ) )}

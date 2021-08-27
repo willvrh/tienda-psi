@@ -1,9 +1,10 @@
 import React from 'react'
-import { Container, makeStyles, Box, Typography, Grid } from '@material-ui/core';
+import { Container, makeStyles, Box, Grid } from '@material-ui/core';
 import ItemDetail from './ItemDetail';
 import { useState, useEffect } from 'react';
 import { mockDataProducts } from '../MockData';
 import Skeleton from '@material-ui/lab/Skeleton';
+import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
     containerBg: {
@@ -52,11 +53,14 @@ export default function ItemDetailContainer (props) {
 
     if (loading) {
         return (
+            <>
+            {props.children}
             <Container className={classes.containerBg}>
+                
                 <Box my={3}>
                 <Grid container spacing={3}  className={classes.root}>
             <Grid item lg={8} md={8} xs={12} style={{textAlign: "center"}}>
-            <Skeleton variant="rect" width={400} height={400} />
+            <Skeleton variant="rect" height={400} />
             </Grid>
             <Grid item lg={4} md={4} xs={12}>
                 <div className={classes.content}>
@@ -72,14 +76,20 @@ export default function ItemDetailContainer (props) {
             </Grid>
                 </Box>
             </Container>
+            </>
         )
     } else {
         return (
+            <>
+            
+            { item.stock<1 && (<Alert severity="warning">El producto que estás viendo se encuentra sin stock.</Alert>)}
+            {props.children}
             <Container className={classes.containerBg}>
                 <Box my={3}>
                     <ItemDetail item={item}/>
                 </Box>
             </Container>
+            </>
         )
      }
     

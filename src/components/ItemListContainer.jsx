@@ -1,27 +1,11 @@
 import React from 'react'
-import { makeStyles, Typography } from '@material-ui/core';
-
-const useStyles = makeStyles((theme) => ({
-    title: {
-      paddingTop: "15px",
-      },
-    }
-));
-
+import Alert from '@material-ui/lab/Alert';
 
 export default function ItemListContainer (props) {
-    const classes = useStyles();
 
     return (
         <div>
-            <Typography 
-                className={classes.title}
-                align="center"
-                variant="h5"
-                color="primary"
-                gutterBottom>
-                {props.greetings}
-            </Typography>
+            <Alert severity="info">{props.greetings}</Alert>
             {props.children}
         </div>
     )

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useLocation } from 'react-router';
-
 import { Breadcrumbs, Link, Typography, capitalize } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
@@ -12,7 +11,7 @@ export default function Breadcrumb() {
 
     if (location == "/") {
         return (
-            <Breadcrumbs style={{float: 'right', paddingRight: '30px', paddingTop: '10px'}} separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
+            <Breadcrumbs style={{float: 'right', position: 'relative', right: '32px', paddingTop: '10px'}} separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
                 <Link color="inherit">
                     Categoría
                 </Link>
@@ -26,7 +25,7 @@ export default function Breadcrumb() {
 
     if (pathArray[1]=="item") {
         return (<>
-            <Breadcrumbs style={{float: 'right', paddingRight: '30px', paddingTop: '10px'}} separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
+            <Breadcrumbs style={{float: 'right', position: 'relative', right: '32px', paddingTop: '10px'}} separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
                 <Link color="inherit">
                     Categoría
                 </Link>
@@ -40,7 +39,7 @@ export default function Breadcrumb() {
 
     if (pathArray[1]=="category") {
         return (
-            <Breadcrumbs style={{float: 'right', paddingRight: '30px', paddingTop: '10px'}} separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
+            <Breadcrumbs style={{float: 'right', position: 'relative', right: '32px', paddingTop: '10px'}} separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
                 <Link color="inherit">
                     Categoría
                 </Link>

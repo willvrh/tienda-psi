@@ -1,6 +1,6 @@
 import {React, useEffect, useState} from "react";
 import { Link } from 'react-router-dom';
-import { makeStyles, Box, Typography, Grid, Button, Tooltip} from "@material-ui/core";
+import { makeStyles, Box, Typography, Grid, Button, Tooltip, Divider, Chip, Avatar  } from "@material-ui/core";
 import ItemCount from "./ItemCount";
 
 const useStyles = makeStyles({
@@ -29,7 +29,10 @@ const useStyles = makeStyles({
         wordBreak: "normal",
         overflow: "hidden",
         fontWeight: '500',
-        color: 'rgba(0,0,0,.6)'
+        color: 'rgba(0,0,0,.6)',
+        paddingBottom: '10px',
+        paddingTop: '10px',
+    
     },
     stock: {
         display: "-webkit-box",
@@ -39,7 +42,8 @@ const useStyles = makeStyles({
         overflow: "hidden",
         fontWeight: '500',
         paddingTop: '10px',
-        color: 'rgba(0,0,0,.6)'
+        color: 'rgba(0,0,0,.6)',
+        paddingBottom: '10px',
     },
     category: {
         display: "-webkit-box",
@@ -104,13 +108,19 @@ export default function ItemDetail(props) {
                         <Box
                             component="div"
                             className={classes.category}>
-                            <Tooltip title={`Ir a la categoría ${item.category}`}>
-                                <Typography className={classes.category} noWrap gutterBottom variant="body2">
-                                ~ {item.category}
-                                </Typography>
-                            </Tooltip>
+                            
+                            <Chip
+                                    variant="outlined"
+                                    size="small"
+                                    style={{marginBottom: '15px',}}
+                                    color="primary"
+                                    avatar={<Avatar>{((item.category || "").charAt(0) || "").toUpperCase()}</Avatar>}
+                                    label={item.category}
+                                />
+                            <Divider />
                         </Box>    
                     </Link>
+                    
                     
 
                     
@@ -124,7 +134,7 @@ export default function ItemDetail(props) {
                             <Typography className={classes.description} gutterBottom variant="body2">
                             {item.description}
                             </Typography>
-
+                            <Divider/>
                             <Typography className={classes.stock} gutterBottom variant="body2">
                                 { stockAvailable ? (
                                         <><b className={classes.available}>Stock disponible:</b> <b>{item.stock}</b> unidades</>        
@@ -132,6 +142,7 @@ export default function ItemDetail(props) {
                                         <><b className={classes.notAvailable}>Stock no disponible</b></> 
                                 )}    
                             </Typography>
+                            <Divider />
                     </Box>    
                     <br/>
                     

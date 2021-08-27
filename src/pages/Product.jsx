@@ -1,14 +1,17 @@
 import React from "react";
-import ItemDetailContainer from "../components/ItemDetailContainer";
-
 import { useParams } from "react-router";
+
+import ItemDetailContainer from "../components/ItemDetailContainer";
+import Breadcrumb from '../components/Breadcrumb';
 
 export default function Product() {
     const { id } = useParams();
     
     return (
         <>
-            <ItemDetailContainer id={id}/>
+            <ItemDetailContainer id={id}>
+            <Breadcrumb/>
+            </ItemDetailContainer>
         </>
     );
 }
