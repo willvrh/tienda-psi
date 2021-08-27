@@ -8,7 +8,7 @@ export default function Category() {
     
     return (
         <>
-            <ItemListContainer>
+            <ItemListContainer greetings={`Hacé clic sobre un producto para ver los detalles`}>
                 <ItemList category={id}/>
             </ItemListContainer>
         </>

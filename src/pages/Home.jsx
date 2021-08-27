@@ -5,7 +5,7 @@ import ItemList from "../components/ItemList";
 export default function Home() {
     return (
         <>
-            <ItemListContainer>
+            <ItemListContainer greetings={`Hacé clic sobre un producto para ver los detalles`}>
                 <ItemList category=""/>
             </ItemListContainer>
         </>

@@ -3,6 +3,7 @@ import Item from './Item';
 import { makeStyles, CircularProgress, Typography, Grid } from '@material-ui/core';
 import { mockDataProducts } from '../MockData';
 import { useLocation } from "react-router";
+import Skeleton from '@material-ui/lab/Skeleton';
 
 export default function ItemList({category}) {
 
@@ -21,13 +22,6 @@ export default function ItemList({category}) {
             alignItems: 'flex-start',
             margin: '0',
         },
-        loader: { 
-            paddingTop: '40px',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center'
-        }
        
     });
 
@@ -58,12 +52,21 @@ export default function ItemList({category}) {
 
     if (loading) {
         return (
-            <div className={classes.loader}>
-                <Typography variant="h4" component="h4">
-                    Cargando ...
-                </Typography>
-                <CircularProgress style={{ marginTop: '40px'}} />
-            </div>
+            
+            <>
+             <Grid className={classes.root} container spacing={3}>
+                {new Array(12).fill(1).map((item) => (
+                <>
+                <Grid item xs={12} sm={6} md={2} >
+                <Skeleton variant="rect" width={200} height={340} />
+                </Grid>
+                </>
+                ) )}
+
+                 
+             </Grid>
+            </>    
+            
         )
     } else {
         return (

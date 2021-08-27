@@ -5,7 +5,7 @@ const mockDataProducts = [
         description: "Sistema de gestión para remiserías",
         price: "10500",
         pictureUrl: '/resources/images/agencia.jpg',
-        stock: 5,
+        stock: 30,
         category: "escritorio",
     },
     {
@@ -14,7 +14,7 @@ const mockDataProducts = [
         description: "Sistema de gestión para mantenimiento de vehículos",
         price: "10500",
         pictureUrl: '/resources/images/mant.jpg',
-        stock: 5,
+        stock: 53,
         category: "escritorio",
     },
     {
@@ -23,7 +23,7 @@ const mockDataProducts = [
         description: "Sistema de gestión para motomensajerías y logística",
         price: "10500",
         pictureUrl: '/resources/images/mens.jpg',
-        stock: 5,
+        stock: 8,
         category: "escritorio",
     },
     {
@@ -41,7 +41,7 @@ const mockDataProducts = [
         description: "Sistema de gestión para petshop y peluquería canina",
         price: "10500",
         pictureUrl: '/resources/images/pet.jpg',
-        stock: 5,
+        stock: 17,
         category: "escritorio",
     },
     {
@@ -50,7 +50,7 @@ const mockDataProducts = [
         description: "Sistema de gestión para gestorías",
         price: "10500",
         pictureUrl: '/resources/images/pgestion.jpg',
-        stock: 5,
+        stock: 38,
         category: "escritorio",
     },
     {
@@ -59,7 +59,7 @@ const mockDataProducts = [
         description: "Sistema de gestión para prestamistas y financieras",
         price: "10500",
         pictureUrl: '/resources/images/prest.jpg',
-        stock: 5,
+        stock: 0,
         category: "escritorio",
     },
     {
@@ -77,7 +77,7 @@ const mockDataProducts = [
         description: "Punto de venta multi rubro para gestionar comercios",
         price: "5900",
         pictureUrl: '/resources/images/pventas.jpg',
-        stock: 5,
+        stock: 0,
         category: "escritorio",
     },
     {
@@ -85,8 +85,17 @@ const mockDataProducts = [
         title: "Carta QR",
         description: "Carta digital para comercios gastronómicos",
         price: "1800",
-        pictureUrl: '/resources/images/pventas.jpg',
-        stock: 5,
+        pictureUrl: '/resources/images/qmenu.jpg',
+        stock: 42,
+        category: "web",
+    },
+    {
+        id: "11",
+        title: "ViaGEST",
+        description: "Sistema web de gestión para logísticas y mensajerías",
+        price: "8000",
+        pictureUrl: '/resources/images/viagest.jpg',
+        stock: 3,
         category: "web",
     },
 ];

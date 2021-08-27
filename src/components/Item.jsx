@@ -1,9 +1,6 @@
-import React from 'react';
+import {React, useEffect, useState} from "react";
 import { Link } from 'react-router-dom';
-
 import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid, Box, makeStyles } from '@material-ui/core';
-import ItemCount from './ItemCount';
-
 
 const useStyles = makeStyles({
     root: {
@@ -49,6 +46,16 @@ const useStyles = makeStyles({
         fontSize: '0.7em',
         color: 'rgba(0,0,0,.4)'
     },
+    stockBox: {
+        display: "-webkit-box",
+        boxOrient: "vertical",
+        wordBreak: "normal",
+        overflow: "hidden",
+        fontWeight: '700',
+        textTransform: 'uppercase',
+        paddingTop: '10px',
+        fontSize: '0.7em',
+    },
     idText: {
         float: 'right',
         fontSize: '0.8em',
@@ -58,17 +65,25 @@ const useStyles = makeStyles({
     priceText: {
         fontWeight: '700',
         fontSize: '1.2em',
+    },
+    available: {
+        color: 'green',
+    },
+    notAvailable: {
+        color: 'red',
+    },
+    low: {
+        color: 'orange',
     }
 });
 
-export default function Item({id, title, description, price, pictureUrl, category}) {
+export default function Item({id, title, description, stock, price, pictureUrl, category}) {
 
     const classes = useStyles();
-    
+  
     return (
         <Grid item xs={12} sm={6} md={2} >
                 <Box boxShadow={3} item xs={12} sm={6} md={2}>
-                    
                     <Card className={classes.root}>
                         <Link title={title} to={`/item/${id}/${category}`} style={{ textDecoration: 'none', color: 'black', }}>
                         <CardActionArea>
@@ -106,6 +121,16 @@ export default function Item({id, title, description, price, pictureUrl, categor
                                     className={classes.descriptionBox}>
                                     {description}
                                 </Box>
+
+                                <Box
+                                    component="div"
+                                    className={classes.stockBox}>
+                                    { stock>0 ? (
+                                        <><b className={stock>10 ? classes.available : classes.low}>en stock: </b> <b>{stock}</b> unidades</>        
+                                    ) : (
+                                        <><b className={classes.notAvailable}>sin stock</b></> 
+                                    )} 
+                                </Box>
                                 
                             </CardContent>
                         </CardActionArea>
@@ -115,8 +140,8 @@ export default function Item({id, title, description, price, pictureUrl, categor
 
                             
                     </Card>
-                    
                 </Box>
+                
             </Grid >
     );
 }

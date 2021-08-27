@@ -1,6 +1,6 @@
-import {ReactChild, useEffect, useState} from "react";
+import {React, useEffect, useState} from "react";
 import { Link } from 'react-router-dom';
-import { makeStyles, Box, Typography, Grid, Button} from "@material-ui/core";
+import { makeStyles, Box, Typography, Grid, Button, Tooltip} from "@material-ui/core";
 import ItemCount from "./ItemCount";
 
 const useStyles = makeStyles({
@@ -12,6 +12,10 @@ const useStyles = makeStyles({
         flexDirection: "column"
     },
     media: {
+        maxHeight: '300px',
+        width: 'auto',
+        transition: "transform 0.15s ease-in-out",
+        "&:hover": { transform: "scale3d(1.08, 1.08, 1)" },
     },
 
     price: {
@@ -25,6 +29,16 @@ const useStyles = makeStyles({
         wordBreak: "normal",
         overflow: "hidden",
         fontWeight: '500',
+        color: 'rgba(0,0,0,.6)'
+    },
+    stock: {
+        display: "-webkit-box",
+        boxOrient: "vertical",
+        lineClamp: 2,
+        wordBreak: "normal",
+        overflow: "hidden",
+        fontWeight: '500',
+        paddingTop: '10px',
         color: 'rgba(0,0,0,.6)'
     },
     category: {
@@ -41,6 +55,12 @@ const useStyles = makeStyles({
         float: 'right',
         fontWeight: '500',
         color: 'rgba(0,0,0,.3)'
+    },
+    available: {
+        color: 'green',
+    },
+    notAvailable: {
+        color: 'red',
     }
 });
 
@@ -49,11 +69,16 @@ export default function ItemDetail(props) {
     const item = props.item;
 
     const [itemQuantity, setQuantity] = useState(0);
+    const [stockAvailable, setStockAvailable] = useState(item.stock>0);
     const [finish, setFinish] = useState(false);
 
     useEffect(() => {
         itemQuantity > 0 ? setFinish(true) : setFinish(false);
     }, [itemQuantity]);
+
+    useEffect(() => {
+
+    }, [item.stock]);
 
     const onAdd = (qty) => {
         if (qty<=item.stock) {
@@ -64,7 +89,7 @@ export default function ItemDetail(props) {
     return (
         <Grid container spacing={3}  className={classes.root}>
             <Grid item lg={8} md={8} xs={12} style={{textAlign: "center"}}>
-                <img style={{maxHeight: '300px', width: 'auto'}} src={item.pictureUrl}></img>
+                <img className={classes.media} src={item.pictureUrl}></img>
             </Grid>
             <Grid item lg={4} md={4} xs={12}>
                 <div className={classes.content}>
@@ -73,14 +98,20 @@ export default function ItemDetail(props) {
                         {item.title}
                         <Typography className={classes.idText}>#{item.id}</Typography>
                     </Typography>
-                    <Box
-                        component="div"
-                        className={classes.category}>
-                            <Typography className={classes.category} noWrap gutterBottom variant="body2">
-                            ~ {item.category}
-                    </Typography>
-                        
-                    </Box>    
+
+                    
+                    <Link to={`/category/${item.category}`} style={{ textDecoration: 'none', color: 'black', }}>
+                        <Box
+                            component="div"
+                            className={classes.category}>
+                            <Tooltip title={`Ir a la categoría ${item.category}`}>
+                                <Typography className={classes.category} noWrap gutterBottom variant="body2">
+                                ~ {item.category}
+                                </Typography>
+                            </Tooltip>
+                        </Box>    
+                    </Link>
+                    
 
                     
                     <Typography className={classes.price} noWrap gutterBottom variant="body2">
@@ -90,14 +121,21 @@ export default function ItemDetail(props) {
                     <Box
                         component="div"
                         className={classes.description}>
-                            <Typography className={classes.description} noWrap gutterBottom variant="body2">
+                            <Typography className={classes.description} gutterBottom variant="body2">
                             {item.description}
-                    </Typography>
-                        
+                            </Typography>
+
+                            <Typography className={classes.stock} gutterBottom variant="body2">
+                                { stockAvailable ? (
+                                        <><b className={classes.available}>Stock disponible:</b> <b>{item.stock}</b> unidades</>        
+                                    ) : (
+                                        <><b className={classes.notAvailable}>Stock no disponible</b></> 
+                                )}    
+                            </Typography>
                     </Box>    
                     <br/>
                     
-                    { !finish && ( <ItemCount mt={3} initial='1' stock={item.stock} onAdd={onAdd}/> ) }
+                    { !finish && stockAvailable && ( <ItemCount mt={3} initial='1' stock={item.stock} onAdd={onAdd}/> ) }
                     
                     { finish && (
                     <Link to={`/cart`} style={{ textDecoration: 'none', color: 'black', }}>
