@@ -1,4 +1,4 @@
-import {React, useEffect, useState} from "react";
+import { React } from "react";
 import { Link } from 'react-router-dom';
 import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid, Box, makeStyles } from '@material-ui/core';
 

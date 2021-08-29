@@ -1,6 +1,7 @@
-import {React, useEffect, useState} from "react";
+import {React, useEffect, useState, useContext} from "react";
+import { CartContext } from '../context/CartContext'
 import { Link } from 'react-router-dom';
-import { makeStyles, Box, Typography, Grid, Button, Tooltip, Divider, Chip, Avatar  } from "@material-ui/core";
+import { makeStyles, Box, Typography, Grid, Button, Divider, Chip, Avatar  } from "@material-ui/core";
 import ItemCount from "./ItemCount";
 
 const useStyles = makeStyles({
@@ -72,6 +73,8 @@ export default function ItemDetail(props) {
     const classes = useStyles();
     const item = props.item;
 
+    const cart = useContext(CartContext);
+
     const [itemQuantity, setQuantity] = useState(0);
     const [stockAvailable, setStockAvailable] = useState(item.stock>0);
     const [finish, setFinish] = useState(false);
@@ -80,13 +83,11 @@ export default function ItemDetail(props) {
         itemQuantity > 0 ? setFinish(true) : setFinish(false);
     }, [itemQuantity]);
 
-    useEffect(() => {
-
-    }, [item.stock]);
-
     const onAdd = (qty) => {
         if (qty<=item.stock) {
             setQuantity(qty)
+            cart.addItem(item, qty);
+            console.log("CART ITEMS", cart.items)
         }
     }
 

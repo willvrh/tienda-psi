@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+
+import { React, useState } from 'react';
 import { ButtonGroup, Button, Typography, Paper, makeStyles } from '@material-ui/core';
 import RemoveIcon from '@material-ui/icons/Remove';
+
 import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles({
@@ -37,9 +39,6 @@ export default function ItemCount(props) {
   return (
         <>
             <ButtonGroup className={classes.buttons} fullWidth size="small" aria-label="large outlined primary button group">
-
-
-
                 <Button
                     aria-label="reduce"
                     color="primary"
