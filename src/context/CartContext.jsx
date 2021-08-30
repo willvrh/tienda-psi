@@ -15,7 +15,9 @@ export const DefaultCartTemplate = {
 
 //CART LOGIC
 DefaultCartTemplate.addItem = (item, quantity) => {
-    DefaultCartTemplate.items = [...DefaultCartTemplate.items, { item: item, quantity: quantity}];
+    if (!DefaultCartTemplate.isInCart(item.id)) {
+        DefaultCartTemplate.items = [...DefaultCartTemplate.items, { item: item, quantity: quantity}];
+    }
 }
 
 DefaultCartTemplate.removeItem = (id) => {
