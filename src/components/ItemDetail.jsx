@@ -1,6 +1,6 @@
 import {React, useEffect, useState, useContext} from "react";
-import { CartContext } from '../context/CartContext'
 import { Link } from 'react-router-dom';
+import { CartContext } from '../context/CartContext'
 import { makeStyles, Box, Typography, Grid, Button, Divider, Chip, Avatar  } from "@material-ui/core";
 import ItemCount from "./ItemCount";
 

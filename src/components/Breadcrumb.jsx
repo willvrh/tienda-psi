@@ -24,7 +24,7 @@ export default function Breadcrumb() {
     });
     const classes = useStyles();
 
-    if (location == "/") {
+    if (location === "/") {
         return (
             <Breadcrumbs className={classes.breadcrumb} separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
                 <Link color="inherit" className={classes.breadLink}>
@@ -36,9 +36,8 @@ export default function Breadcrumb() {
             </Breadcrumbs>
             );
     } 
-    
 
-    if (pathArray[1]=="item") {
+    if (pathArray[1] === "item") {
         return (<>
             
             <Breadcrumbs className={classes.breadcrumb} separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
@@ -53,7 +52,7 @@ export default function Breadcrumb() {
         );
     }
 
-    if (pathArray[1]=="category") {
+    if (pathArray[1] === "category") {
         return (
             <Breadcrumbs className={classes.breadcrumb} separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
                 <Link color="inherit" className={classes.breadLink}>
@@ -65,6 +64,17 @@ export default function Breadcrumb() {
             </Breadcrumbs>
         );
     }
+
+    if (location === "/cart") {
+        return (
+            <Breadcrumbs className={classes.breadcrumb} separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
+                <Link color="inherit" className={classes.breadLink}>
+                    Carrito
+                </Link>
+            </Breadcrumbs>
+            );
+    }    
+    
 
     
 }   

@@ -2,7 +2,6 @@
 import { React, useState } from 'react';
 import { ButtonGroup, Button, Typography, Paper, makeStyles } from '@material-ui/core';
 import RemoveIcon from '@material-ui/icons/Remove';
-
 import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles({

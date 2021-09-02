@@ -1,16 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import { makeStyles, AppBar, Toolbar, IconButton, Typography, MenuItem, Menu, Button } from '@material-ui/core';
-
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import HomeIcon from '@material-ui/icons/Home';
 import MoreIcon from '@material-ui/icons/MoreVert';
-
-import CartWidget from './CartWidget';
-
 import { mockDataCategories } from '../MockData';
-
+import CartWidget from './CartWidget';
 
 
 const useStyles = makeStyles((theme) => ({

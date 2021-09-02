@@ -1,13 +1,15 @@
 import { createContext } from "react";
 
-
 export const CartContext = createContext({
     items: [],
     addItem: (item, quantity) => { }, 
     removeItem: (itemId) => { },
     clear: () => { },
-    isInCart: (id) => { }
+    isInCart: (id) => { },
+    getItemCount: () => {},
+    getCartAmount: () => {}
 });
+
 
 export const DefaultCartTemplate = {
     items: []
@@ -34,4 +36,24 @@ DefaultCartTemplate.isInCart = (id) => {
     return DefaultCartTemplate.items.filter(function (item) {
         return item.item.id == id;
      }).length>0;
+}
+
+DefaultCartTemplate.getItemCount = () => {
+    let count = 0;
+
+    DefaultCartTemplate.items.map( item => {
+        count += item.quantity;
+    });
+
+    return count;
+}
+
+DefaultCartTemplate.getCartAmount = () => {
+    let amount = 0;
+
+    DefaultCartTemplate.items.map( item => {
+        amount += item.quantity*item.item.price;
+    });
+
+    return amount;
 }

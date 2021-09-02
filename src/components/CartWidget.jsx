@@ -1,20 +1,27 @@
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { CartContext } from '../context/CartContext'
-import Badge from '@material-ui/core/Badge';
+import {Badge, IconButton} from '@material-ui/core';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import IconButton from '@material-ui/core/IconButton';
 
 export default function CartWidget() {
 
     const cart = useContext(CartContext);
+   
+    if (cart.getItemCount()>0) {
+        return (
+            <>
+                <Link to={`/cart`} style={{ textDecoration: 'none', color: 'white'}}>
+                    <IconButton aria-label="ver contenido del carrito" color="inherit">
+                    <Badge badgeContent={cart.getItemCount()} color="secondary">
+                        <ShoppingCartIcon />
+                    </Badge>
+                    </IconButton>
+                </Link>
+            </>
+        );
+    } else {
+        return (<></>);
+    }
     
-    return (
-        <>
-            <IconButton aria-label="ver contenido del carrito" color="inherit">
-            <Badge badgeContent={cart.items.length} color="secondary">
-                <ShoppingCartIcon />
-            </Badge>
-            </IconButton>
-        </>
-    );
   }

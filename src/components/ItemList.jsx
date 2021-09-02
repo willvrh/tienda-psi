@@ -1,8 +1,8 @@
 import { React, useEffect, useState } from 'react';
-import Item from './Item';
 import { makeStyles, Grid, Box } from '@material-ui/core';
 import { mockDataProducts } from '../MockData';
 import { useLocation } from "react-router";
+import Item from './Item';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 export default function ItemList({category}) {

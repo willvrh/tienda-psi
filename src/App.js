@@ -10,6 +10,7 @@ import NavBar from './components/NavBar';
 import Home from './pages/Home';
 import Category from './pages/Category';
 import Product from './pages/Product';
+import ViewCart from './pages/ViewCart';
 
 function App() {
 
@@ -21,6 +22,9 @@ function App() {
           <Switch>
             <Route exact path="/">
             <Home/>
+            </Route>
+            <Route exact path="/cart">
+            <ViewCart/>
             </Route>
             <Route exact path="/category/:id">
             <Category/>
