@@ -7,7 +7,19 @@ const CartContextProvider = ({children}) => {
     const [cart, setCart] = useState([])
 
     const addItem = (item, quantity) => {
-        setCart([...cart, { item: item, quantity: quantity}]);
+        if (!isInCart(item.id)) {
+            setCart([...cart, { item: item, quantity: quantity}]);
+        } else {
+            cart.map( itemX => {
+                if (itemX.item.id == item.id) {
+                    itemX.quantity += quantity;
+                    if (itemX.quantity>itemX.item.stock) {
+                        itemX.quantity = itemX.item.stock;
+                    }
+                }
+            });
+            setCart([...cart]);
+        }
     }
 
     const removeItem = (id) => {

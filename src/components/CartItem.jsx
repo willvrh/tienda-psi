@@ -1,4 +1,5 @@
 import { React } from "react";
+import { Link } from 'react-router-dom';
 import { IconButton, ListItem, ListItemSecondaryAction, ListItemAvatar, Typography, ListItemText, Avatar, Chip} from '@material-ui/core';
 import DeleteIcon from "@material-ui/icons/Delete";
 
@@ -7,7 +8,8 @@ export default function CartItem(props) {
     const cartItem = props.cartItem;
 
     return (
-        <ListItem button key={cartItem.item.id}> 
+      <Link to={`/item/${cartItem.item.id}/${cartItem.item.category}`} style={{ textDecoration: 'none', color: 'black', }}>
+        <ListItem key={cartItem.item.id}> 
             <ListItemAvatar>
               <Avatar alt={cartItem.item.title} src={cartItem.item.pictureUrl}/>
             </ListItemAvatar>
@@ -32,5 +34,6 @@ export default function CartItem(props) {
               </IconButton>
             </ListItemSecondaryAction>
           </ListItem>
+          </Link>
     );
 }
