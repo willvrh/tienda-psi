@@ -22,15 +22,15 @@ export default function Cart(props) {
   const classes = useStyles();
   const cart = useContext(CartContext);
 
-  const [cartItems, setCartItems] = useState(cart.items);
+  const [cartItems, setCartItems] = useState(cart.cart);
 
   useEffect(() => {
-    setCartItems(cart.items);
-  }, [cart.items])
+    setCartItems(cart.cart);
+  }, [cart.cart])
 
   const onDelete = (id) => {
     cart.removeItem(id);
-    setCartItems(cart.items);
+    setCartItems(cart.cart);
   }
     
   return (

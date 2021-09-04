@@ -1,59 +1,63 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
-export const CartContext = createContext({
-    items: [],
-    addItem: (item, quantity) => { }, 
-    removeItem: (itemId) => { },
-    clear: () => { },
-    isInCart: (id) => { },
-    getItemCount: () => {},
-    getCartAmount: () => {}
-});
+export const CartContext = createContext();
 
+const CartContextProvider = ({children}) => {
 
-export const DefaultCartTemplate = {
-    items: []
-}
+    const [cart, setCart] = useState([])
 
-//CART LOGIC
-DefaultCartTemplate.addItem = (item, quantity) => {
-    if (!DefaultCartTemplate.isInCart(item.id)) {
-        DefaultCartTemplate.items = [...DefaultCartTemplate.items, { item: item, quantity: quantity}];
+    const addItem = (item, quantity) => {
+        setCart([...cart, { item: item, quantity: quantity}]);
     }
+
+    const removeItem = (id) => {
+        setCart(cart.filter(function (obj) {
+            return obj.item.id != id;
+        }));
+    }
+
+    const getItemCount = () => {
+        let count = 0;
+        cart.map( item => {
+            count += item.quantity;
+        });
+        return count;
+    }
+
+    const getCartAmount = () => {
+        let amount = 0;
+        cart.map( item => {
+            amount += item.item.price * item.quantity;
+        });
+        return amount;
+    }
+
+
+    const isInCart = (id) => {
+        return cart.filter(function (item) {
+            return item.item.id == id;
+         }).length>0;
+    }
+
+    const clear = () => {
+        setCart([]);
+    }
+
+    const contextValues = {
+        addItem,
+        removeItem,
+        getItemCount,
+        clear,
+        isInCart,
+        getCartAmount,
+        cart
+    } 
+
+    return ( 
+        <CartContext.Provider value={contextValues} >
+            { children }
+        </CartContext.Provider>
+     );
 }
-
-DefaultCartTemplate.removeItem = (id) => {
-    DefaultCartTemplate.items = DefaultCartTemplate.items.filter(function (obj) {
-        return obj.item.id != id;
-    });
-}
-
-DefaultCartTemplate.clear = () => {
-    DefaultCartTemplate.items = [];
-}
-
-DefaultCartTemplate.isInCart = (id) => {
-    return DefaultCartTemplate.items.filter(function (item) {
-        return item.item.id == id;
-     }).length>0;
-}
-
-DefaultCartTemplate.getItemCount = () => {
-    let count = 0;
-
-    DefaultCartTemplate.items.map( item => {
-        count += item.quantity;
-    });
-
-    return count;
-}
-
-DefaultCartTemplate.getCartAmount = () => {
-    let amount = 0;
-
-    DefaultCartTemplate.items.map( item => {
-        amount += item.quantity*item.item.price;
-    });
-
-    return amount;
-}
+ 
+export default CartContextProvider;

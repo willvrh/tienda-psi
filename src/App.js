@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Container }  from '@material-ui/core';
 
-import { CartContext, DefaultCartTemplate } from './context/CartContext';
+import CartContextProvider from './context/CartContext';
 
 import NavBar from './components/NavBar';
 import Home from './pages/Home';
@@ -16,7 +16,7 @@ function App() {
 
 
   return (
-      <CartContext.Provider value={DefaultCartTemplate}>
+      <CartContextProvider>
         <Container disableGutters={true} maxWidth='xl'>
           <NavBar/>
           <Switch>
@@ -34,7 +34,7 @@ function App() {
             </Route>
           </Switch>
       </Container>
-     </CartContext.Provider>
+     </CartContextProvider>
   );
 }
 

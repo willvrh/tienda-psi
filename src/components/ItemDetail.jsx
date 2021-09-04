@@ -87,7 +87,7 @@ export default function ItemDetail(props) {
         if (qty<=item.stock) {
             setQuantity(qty)
             cart.addItem(item, qty);
-            console.log("CART ITEMS", cart.items)
+            console.log("CART ITEMS", cart.cart)
         }
     }
 
