@@ -7,7 +7,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 
 
 import { query, where, collection, getDocs } from 'firebase/firestore';
-import { getData } from '../firebase/client';
+import { getData } from '../firebase/Client';
 
 
 export default function ItemList({category}) {

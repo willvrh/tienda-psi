@@ -6,7 +6,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import Alert from '@material-ui/lab/Alert';
 
 import { query, where, collection, getDocs } from 'firebase/firestore';
-import { getData } from '../firebase/client';
+import { getData } from '../firebase/Client';
 
 const useStyles = makeStyles((theme) => ({
     containerBg: {

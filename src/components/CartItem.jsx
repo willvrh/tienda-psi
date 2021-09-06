@@ -1,6 +1,6 @@
 import { React } from "react";
 import { Link } from 'react-router-dom';
-import { Divider, IconButton, ListItem, ListItemSecondaryAction, ListItemAvatar, Typography, ListItemText, Avatar, Chip} from '@material-ui/core';
+import { IconButton, ListItem, ListItemSecondaryAction, ListItemAvatar, Typography, ListItemText, Avatar, Chip} from '@material-ui/core';
 import DeleteIcon from "@material-ui/icons/Delete";
 
 export default function CartItem(props) {
@@ -35,7 +35,7 @@ export default function CartItem(props) {
                 <DeleteIcon style={{color: 'red',}}/>
               </IconButton>
             </ListItemSecondaryAction>
-            <Divider variant="inset" component="li" />
+            
           </ListItem>
     );
 }

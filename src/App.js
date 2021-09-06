@@ -11,7 +11,7 @@ import Category from './pages/Category';
 import Product from './pages/Product';
 import ViewCart from './pages/ViewCart';
 
-
+import CarouselContainer from './components/Carousel';
 
 
 function App() {
@@ -21,8 +21,10 @@ function App() {
       <CartContextProvider>
         <Container disableGutters={true} maxWidth='xl'>
           <NavBar/>
+          
           <Switch>
             <Route exact path="/">
+            <CarouselContainer/>
             <Home/>
             </Route>
             <Route exact path="/cart">
