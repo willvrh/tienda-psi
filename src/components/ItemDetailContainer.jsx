@@ -2,11 +2,10 @@ import React from 'react'
 import { Container, makeStyles, Box, Grid } from '@material-ui/core';
 import ItemDetail from './ItemDetail';
 import { useState, useEffect } from 'react';
-import { mockDataProducts } from '../MockData';
 import Skeleton from '@material-ui/lab/Skeleton';
 import Alert from '@material-ui/lab/Alert';
 
-import { getFirestore, query, where, collection, getDocs } from 'firebase/firestore';
+import { query, where, collection, getDocs } from 'firebase/firestore';
 import { getData } from '../firebase/client';
 
 const useStyles = makeStyles((theme) => ({
@@ -38,10 +37,8 @@ export default function ItemDetailContainer (props) {
 
 
     useEffect(() => {
-        
 
         const getItem = async () => {
-           
             const filterQuery = query(collection(getData(), "productos"), where("__name__", "==", itemId));
             const itemSnapshot = await getDocs(filterQuery);
             setItem(itemSnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}))[0]);

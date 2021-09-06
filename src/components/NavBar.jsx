@@ -1,11 +1,14 @@
-import React from 'react';
+import { React, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
 import { makeStyles, AppBar, Toolbar, IconButton, Typography, MenuItem, Menu, Button } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import HomeIcon from '@material-ui/icons/Home';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import { mockDataCategories } from '../MockData';
 import CartWidget from './CartWidget';
+
+import { getFirestore, query, where, collection, getDocs } from 'firebase/firestore';
+import { getData } from '../firebase/client';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -41,11 +44,28 @@ const useStyles = makeStyles((theme) => ({
 export default function NavBar() {
 
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
+  const [categories, setCategories] = useState([]);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+
+    
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  useEffect(() => {
+        
+
+    const getCategories = async () => {
+      const categoriesCollection = collection(getData(), 'categorias');
+      const categoriesSnapshot = await getDocs(categoriesCollection);
+      setCategories(categoriesSnapshot.docs.map(doc => ({...doc.data()})));
+    };
+
+    getCategories();
+
+}, []);
+
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -79,7 +99,7 @@ export default function NavBar() {
         <MenuItem onClick={handleMenuClose}>Todas</MenuItem>
       </Link>
 
-      {mockDataCategories.map((category) => (
+      {categories.map((category) => (
       <>
       <Link to={`/category/${category.shortname}`} style={{ textDecoration: 'none', color: 'black', }}>
         <MenuItem onClick={handleMenuClose}>{category.name}</MenuItem>

@@ -6,7 +6,7 @@ import Item from './Item';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 
-import { getFirestore, query, where, collection, getDocs } from 'firebase/firestore';
+import { query, where, collection, getDocs } from 'firebase/firestore';
 import { getData } from '../firebase/client';
 
 

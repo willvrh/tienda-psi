@@ -87,7 +87,6 @@ export default function ItemDetail(props) {
         if (qty<=item.stock) {
             setQuantity(qty)
             cart.addItem(item, qty);
-            console.log("CART ITEMS", cart.cart)
         }
     }
 
@@ -101,7 +100,6 @@ export default function ItemDetail(props) {
                                     
                     <Typography gutterBottom variant="h5" >
                         {item.title}
-                        <Typography className={classes.idText}>#{item.id}</Typography>
                     </Typography>
 
                     
