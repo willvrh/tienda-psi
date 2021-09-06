@@ -2,6 +2,9 @@ import { React } from "react";
 import { Link } from 'react-router-dom';
 import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid, Box, makeStyles } from '@material-ui/core';
 
+import { getFirestore, query, where, collection, getDocs } from 'firebase/firestore';
+import { getData, app } from '../firebase/client';
+
 const useStyles = makeStyles({
     root: {
         // maxWidth: 345, original width style
@@ -77,10 +80,11 @@ const useStyles = makeStyles({
     }
 });
 
-export default function Item({id, title, description, stock, price, pictureUrl, category}) {
+export default function Item({id, orderNum, title, description, stock, price, pictureUrl, category}) {
 
     const classes = useStyles();
-  
+    
+
     return (
         <Grid item xs={12} sm={6} md={2} >
                 <Box boxShadow={3} item xs={12} sm={6} md={2}>
@@ -99,7 +103,7 @@ export default function Item({id, title, description, stock, price, pictureUrl, 
                                     
                                     <Typography className={classes.priceText} gutterBottom variant="h5" >
                                         $ {Number(price).toLocaleString('es-AR')}
-                                        <Typography className={classes.idText}>#{id}</Typography>
+                                        <Typography className={classes.idText}>#{orderNum}</Typography>
                                     </Typography>
                                     
                                     

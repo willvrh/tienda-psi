@@ -3,7 +3,6 @@ import '@fontsource/roboto';
 import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Container }  from '@material-ui/core';
-
 import CartContextProvider from './context/CartContext';
 
 import NavBar from './components/NavBar';
@@ -11,6 +10,9 @@ import Home from './pages/Home';
 import Category from './pages/Category';
 import Product from './pages/Product';
 import ViewCart from './pages/ViewCart';
+
+
+
 
 function App() {
 

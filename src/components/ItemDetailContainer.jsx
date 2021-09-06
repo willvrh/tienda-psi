@@ -6,6 +6,9 @@ import { mockDataProducts } from '../MockData';
 import Skeleton from '@material-ui/lab/Skeleton';
 import Alert from '@material-ui/lab/Alert';
 
+import { getFirestore, query, where, collection, getDocs } from 'firebase/firestore';
+import { getData } from '../firebase/client';
+
 const useStyles = makeStyles((theme) => ({
     containerBg: {
       background : '#fff',
@@ -33,23 +36,23 @@ export default function ItemDetailContainer (props) {
     const [item, setItem] = useState({});
     const [loading, setLoading] = useState(false);
 
+
     useEffect(() => {
-        getItems();
+        
+
+        const getItem = async () => {
+           
+            const filterQuery = query(collection(getData(), "productos"), where("__name__", "==", itemId));
+            const itemSnapshot = await getDocs(filterQuery);
+            setItem(itemSnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}))[0]);
+            setLoading(false);
+        };
+
+        setLoading(true);
+        getItem();
+
     }, []);
 
-    const getItems = () => {
-        new Promise((resolve, reject) => {
-            setLoading(true);
-            setTimeout(() => resolve(mockDataProducts.find(product => product.id === itemId)), 2000);
-        })
-        .then((itemResponse) => {
-            setItem(itemResponse);
-            setLoading(false);
-        })
-        .catch((error) => {
-            console.log("err", error);
-        });
-    }
 
     if (loading) {
         return (

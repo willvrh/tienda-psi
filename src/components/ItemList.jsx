@@ -5,10 +5,15 @@ import { useLocation } from "react-router";
 import Item from './Item';
 import Skeleton from '@material-ui/lab/Skeleton';
 
+
+import { getFirestore, query, where, collection, getDocs } from 'firebase/firestore';
+import { getData } from '../firebase/client';
+
+
 export default function ItemList({category}) {
 
     const [items, setItems] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const location = useLocation();
 
 
@@ -28,25 +33,28 @@ export default function ItemList({category}) {
     const classes = useStyles();
         
     useEffect(() => {
-        new Promise((resolve, reject) => {
-            setLoading(true);
-            var data = mockDataProducts;
+        
 
-            if (category != "" && category != "todas") {
-                data = mockDataProducts.filter(product => {
-                    return product.category == category;
-                })
+        const getItems = async () => {
+            let operator = "==";
+            let searchCat = category;
+            if (!(category != "todas" && category != "")) {
+                operator = "!=";
+                searchCat = "";
             }
+            const filterQuery = query(collection(getData(), "productos"), where("category", operator, searchCat));
+            const itemSnapshot = await getDocs(filterQuery);
 
-            setTimeout(() => resolve(data), 2000);
-        })
-        .then((dataResolve) => {
-                setItems(dataResolve);
-                setLoading(false);
-        })
-        .catch((error) => {
-                console.log("err", error);
-        });
+            let count = 1; //Usado solo para mostrar un contador de items -> orderNum
+            const itemList = itemSnapshot.docs.map(doc => ({id: doc.id, orderNum: count++, ...doc.data()}));
+
+            setItems(itemList);
+            setLoading(false);
+        };
+
+        setLoading(true);
+        getItems();
+
     }, [location.pathname]);
 
 
