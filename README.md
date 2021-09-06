@@ -4,7 +4,12 @@ El proyecto fue creado [Create React App](https://github.com/facebook/create-rea
 
 ## Dependencias (fuera de las solicitadas en el curso)
 
-Material UI
+@fontsource/roboto@4.5.0
+@material-ui/core
+@material-ui/lab
+react-material-ui-carousel
+firebase@9.0.1
+sass
 
 ### Descripción del proyecto
 
