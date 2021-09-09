@@ -7,8 +7,8 @@ import HomeIcon from '@material-ui/icons/Home';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import CartWidget from './CartWidget';
 
-import { getFirestore, query, where, collection, getDocs } from 'firebase/firestore';
-import { getData } from '../firebase/Client';
+import { collection, getDocs } from 'firebase/firestore';
+import { getData } from '../firebase/FirebaseClient';
 
 
 const useStyles = makeStyles((theme) => ({

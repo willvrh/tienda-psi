@@ -2,8 +2,6 @@ import { React } from "react";
 import { Link } from 'react-router-dom';
 import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid, Box, makeStyles } from '@material-ui/core';
 
-import { getFirestore, query, where, collection, getDocs } from 'firebase/firestore';
-import { getData, app } from '../firebase/Client';
 
 const useStyles = makeStyles({
     root: {

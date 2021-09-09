@@ -4,7 +4,7 @@ import Carousel from 'react-material-ui-carousel'
 import { Paper, Button, Typography } from '@material-ui/core'
 
 import { collection, getDocs } from 'firebase/firestore';
-import { getData } from '../firebase/Client';
+import { getData } from '../firebase/FirebaseClient';
 
 
 export default function CarouselContainer() {

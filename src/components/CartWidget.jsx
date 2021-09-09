@@ -1,6 +1,6 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import {CartContext, CartContextProvider} from '../context/CartContext'
+import { CartContext } from '../context/CartContext'
 import {Badge, IconButton} from '@material-ui/core';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 

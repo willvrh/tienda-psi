@@ -93,7 +93,7 @@ export default function ItemDetail(props) {
     return (
         <Grid container spacing={3}  className={classes.root}>
             <Grid item lg={8} md={8} xs={12} style={{textAlign: "center"}}>
-                <img className={classes.media} src={item.pictureUrl}></img>
+                <img className={classes.media} alt="" src={item.pictureUrl}></img>
             </Grid>
             <Grid item lg={4} md={4} xs={12}>
                 <div className={classes.content}>
@@ -150,7 +150,7 @@ export default function ItemDetail(props) {
                     { finish && (
                     <Link to={`/cart`} style={{ textDecoration: 'none', color: 'black', }}>
                         <Button style={{marginTop: '8px'}} fullWidth variant="outlined">
-                         Terminar compra
+                         Ir al carrito
                         </Button>
                     </Link>)
                     }

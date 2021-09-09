@@ -1,13 +1,12 @@
 import { React, useEffect, useState } from 'react';
 import { makeStyles, Grid, Box } from '@material-ui/core';
-import { mockDataProducts } from '../MockData';
 import { useLocation } from "react-router";
 import Item from './Item';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 
 import { query, where, collection, getDocs } from 'firebase/firestore';
-import { getData } from '../firebase/Client';
+import { getData } from '../firebase/FirebaseClient';
 
 
 export default function ItemList({category}) {

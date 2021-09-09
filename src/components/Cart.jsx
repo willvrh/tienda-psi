@@ -1,13 +1,18 @@
 import { React, useContext } from "react";
 import { Link } from 'react-router-dom';
-import { Container, makeStyles, Box, List, Typography, Grid, Divider, Chip, Avatar, Button } from "@material-ui/core";
+import { Container, makeStyles, Box, List, Typography, Grid, Divider, Button } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import { CartContext } from "../context/CartContext";
 import CartItem from "./CartItem";
+import BuyerForm from "./BuyerForm";
 import Alert from "@material-ui/lab/Alert";
 import CheckCircleOutlineOutlinedIcon from '@material-ui/icons/CheckCircleOutlineOutlined';
 import ErrorOutlineOutlinedIcon from '@material-ui/icons/ErrorOutlineOutlined';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+
+import { query, where, collection, getDocs, setDoc, doc, addDoc, Timestamp } from 'firebase/firestore';
+
+import { getData } from '../firebase/FirebaseClient';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,6 +72,7 @@ export default function Cart(props) {
   const cart = useContext(CartContext);
 
   const [cartItems, setCartItems] = useState(cart.cart);
+  const [formOpen, setFormOpen] = useState(false);
 
   useEffect(() => {
     setCartItems(cart.cart);
@@ -76,6 +82,23 @@ export default function Cart(props) {
     cart.removeItem(id);
     setCartItems(cart.cart);
   }
+
+  const onBuyFinish = async () => {
+    console.log('FIN de compra');
+
+    
+    // Add a new document in collection "cities"
+    const order = {
+      //buyer: userInfo,
+      items: cartItems,
+      date: Timestamp.fromDate(new Date()),
+      total: cart.getCartAmount()
+    };
+
+    const orderReference = await addDoc(collection(getData(), "ordenes"), order);
+
+    console.log("order ref", orderReference._key.path.segments[1]);
+  };
 
   return (
     <>
@@ -133,7 +156,7 @@ export default function Cart(props) {
 
 
 
-                <Button style={{ marginTop: '12px' }} fullWidth variant="outlined">
+                <Button style={{ marginTop: '12px' }} onClick={ ()=> setFormOpen(true)}fullWidth variant="outlined">
                   Finalizar compra
                 </Button>
 
@@ -144,9 +167,13 @@ export default function Cart(props) {
           </Grid>
 
 
-
+          <BuyerForm 
+            open={formOpen}
+            setFormOpen={setFormOpen}
+            onBuyFinish={onBuyFinish}
+            />
         </Container>
-
+        
         :
         <></>}
     </>
