@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import Category from './pages/Category';
 import Product from './pages/Product';
 import ViewCart from './pages/ViewCart';
+import ViewOrder from './pages/ViewOrder';
 
 import CarouselContainer from './components/Carousel';
 
@@ -35,6 +36,9 @@ function App() {
             </Route>
             <Route exact path="/item/:id/:category" >
             <Product/>
+            </Route>
+            <Route exact path="/order/:id">
+            <ViewOrder/>
             </Route>
           </Switch>
       </Container>

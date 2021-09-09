@@ -30,11 +30,14 @@ export default function CartItem(props) {
             />
             </Link>
            
+           {props.type == "cart"?
             <ListItemSecondaryAction>
               <IconButton edge="end" aria-label="eliminar" onClick={ () => {props.onDelete(cartItem.item.id)}}>
                 <DeleteIcon style={{color: 'red',}}/>
               </IconButton>
-            </ListItemSecondaryAction>
+            </ListItemSecondaryAction> : <></>
+           }
+            
             
           </ListItem>
     );

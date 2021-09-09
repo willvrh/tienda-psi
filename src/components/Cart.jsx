@@ -9,6 +9,14 @@ import Alert from "@material-ui/lab/Alert";
 import CheckCircleOutlineOutlinedIcon from '@material-ui/icons/CheckCircleOutlineOutlined';
 import ErrorOutlineOutlinedIcon from '@material-ui/icons/ErrorOutlineOutlined';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { query, where, collection, getDocs, setDoc, doc, addDoc, Timestamp } from 'firebase/firestore';
 
@@ -73,6 +81,8 @@ export default function Cart(props) {
 
   const [cartItems, setCartItems] = useState(cart.cart);
   const [formOpen, setFormOpen] = useState(false);
+  const [creatingOrder, setCreatingOrder] = useState(false);
+  const [buyStatus, setBuyStatus] = useState({isFinished: false, orderId: ''});
 
   useEffect(() => {
     setCartItems(cart.cart);
@@ -83,21 +93,21 @@ export default function Cart(props) {
     setCartItems(cart.cart);
   }
 
-  const onBuyFinish = async () => {
-    console.log('FIN de compra');
+  const onBuyFinish = async (buyerData) => {
+    setCreatingOrder(true);
 
-    
-    // Add a new document in collection "cities"
+    delete buyerData.repeatEmail;
     const order = {
-      //buyer: userInfo,
+      buyer: buyerData,
       items: cartItems,
       date: Timestamp.fromDate(new Date()),
       total: cart.getCartAmount()
     };
 
     const orderReference = await addDoc(collection(getData(), "ordenes"), order);
-
-    console.log("order ref", orderReference._key.path.segments[1]);
+    const orderId = orderReference._key.path.segments[1];
+    
+    setBuyStatus({isFinished: true, orderId: orderId})
   };
 
   return (
@@ -109,7 +119,7 @@ export default function Cart(props) {
         :
         <Alert icon={<ErrorOutlineOutlinedIcon fontSize="inherit" className="pulsatingIcon" />} severity="error">
           No tenés items en el carrito.
-          <Link to={`/`}>
+          <Link style={{marginLeft: '20px'}} to={`/`}>
             Volvé al listado de productos.
           </Link>
 
@@ -126,9 +136,14 @@ export default function Cart(props) {
             <Grid item lg={8} md={8} xs={12}>
             <Box boxShadow={3} item lg={8} md={8} xs={12} style={{padding: '15px'}}>
               <List>
-                {cartItems.map((cartItem) => (<><CartItem cartItem={cartItem} onDelete={onDelete} /><Divider variant="inset" component="li" /></>))}
+                {cartItems.map((cartItem) => (<><CartItem type='cart' cartItem={cartItem} onDelete={onDelete} /><Divider variant="inset" component="li" /></>))}
               </List>
+
+                <Button style={{ marginTop: '12px' }} onClick={ ()=> cart.clear()}fullWidth variant="outlined">
+                  <HighlightOffIcon style={{color: 'red', marginRight: '15px'}}/> Vaciar carrito
+                </Button>
               </Box>
+
             </Grid>
 
             <Grid item lg={4} md={4} xs={12} >
@@ -156,8 +171,8 @@ export default function Cart(props) {
 
 
 
-                <Button style={{ marginTop: '12px' }} onClick={ ()=> setFormOpen(true)}fullWidth variant="outlined">
-                  Finalizar compra
+                <Button style={{ marginTop: '12px', }} onClick={ ()=> setFormOpen(true)}fullWidth variant="outlined">
+                <CheckCircleOutlineIcon style={{color: 'green', marginRight: '15px'}}/>Finalizar compra
                 </Button>
 
 
@@ -171,7 +186,26 @@ export default function Cart(props) {
             open={formOpen}
             setFormOpen={setFormOpen}
             onBuyFinish={onBuyFinish}
+            creatingOrder={creatingOrder}
+            buyStatus={buyStatus}
             />
+
+          <Dialog 
+            onClose={()=>cart.clear()}
+            open={buyStatus.isFinished}>
+            <DialogTitle id="simple-dialog-title">Órden de compra finalizada</DialogTitle>
+            <DialogContent>
+             <DialogContentText id="alert-dialog-description">
+              Tu órden de compra fue registrada correctamente, podés consultar la misma con el siguiente ID: <br/><br/><b>{buyStatus.orderId}</b>
+             </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={()=>cart.clear()} color="primary" autoFocus>
+                Cerrar
+              </Button>
+            </DialogActions>
+          </Dialog>
+
         </Container>
         
         :

@@ -52,6 +52,21 @@ export default function Breadcrumb() {
         );
     }
 
+    if (pathArray[1] === "order") {
+        return (<>
+            
+            <Breadcrumbs className={classes.breadcrumb} separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
+                <Link color="inherit" className={classes.breadLink}>
+                    Órden
+                </Link>
+                <Link to={`/order/${pathArray[2]}`} className={classes.breadLink}>
+                    <Typography color="textPrimary">{capitalize(pathArray[2])}</Typography>
+                </Link>
+            </Breadcrumbs>
+            </>
+        );
+    }
+
     if (pathArray[1] === "category") {
         return (
             <Breadcrumbs className={classes.breadcrumb} separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">

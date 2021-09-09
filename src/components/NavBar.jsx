@@ -6,7 +6,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import HomeIcon from '@material-ui/icons/Home';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import CartWidget from './CartWidget';
-
+import OrderSearchPopOver from './OrderSearchPopOver';
 import { collection, getDocs } from 'firebase/firestore';
 import { getData } from '../firebase/FirebaseClient';
 
@@ -159,6 +159,7 @@ export default function NavBar() {
           </Link>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+          <OrderSearchPopOver/>
             <Button edge="end"
               aria-label="categorías de la tienda"
               aria-controls={menuId}
