@@ -4,11 +4,13 @@ import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Container }  from '@material-ui/core';
 import CartContextProvider from './context/CartContext';
+import AuthContextProvider from './context/AuthContext';
 
 import NavBar from './components/NavBar';
 import Home from './pages/Home';
 import Category from './pages/Category';
 import Product from './pages/Product';
+import Orders from './pages/Orders';
 import ViewCart from './pages/ViewCart';
 import ViewOrder from './pages/ViewOrder';
 
@@ -19,6 +21,7 @@ function App() {
 
 
   return (
+    <AuthContextProvider>
       <CartContextProvider>
         <Container disableGutters={true} maxWidth='xl'>
           <NavBar/>
@@ -40,9 +43,13 @@ function App() {
             <Route exact path="/order/:id">
             <ViewOrder/>
             </Route>
+            <Route exact path="/orders">
+            <Orders/>
+            </Route>
           </Switch>
       </Container>
      </CartContextProvider>
+     </AuthContextProvider>
   );
 }
 

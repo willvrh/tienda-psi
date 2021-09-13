@@ -1,6 +1,6 @@
 import { React } from "react";
 import { Link } from 'react-router-dom';
-import { Container, makeStyles, Box, List, Typography, Grid, Divider, Button } from "@material-ui/core";
+import { Container, makeStyles, Box, List, Typography, Grid, Divider } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import CartItem from "./CartItem";
 import Alert from "@material-ui/lab/Alert";
@@ -9,7 +9,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 import { query, where, collection, getDocs } from 'firebase/firestore';
-import { getData } from '../firebase/FirebaseClient';
+import { db } from '../firebase/FirebaseClient';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -73,7 +73,7 @@ export default function Order(props) {
 
   useEffect(() => {
     (async () => {
-      const filterQuery = query(collection(getData(), "ordenes"), where("__name__", "==", props.id));
+      const filterQuery = query(collection(db, "ordenes"), where("__name__", "==", props.id));
       const orderSnapshot = await getDocs(filterQuery);
       
       setOrder(orderSnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}))[0]);

@@ -1,19 +1,19 @@
-import { React, useEffect, useState } from 'react';
+import { React, useEffect, useState, useContext } from 'react';
 import { makeStyles, Grid, Box } from '@material-ui/core';
-import { useLocation } from "react-router";
-import Item from './Item';
 import Skeleton from '@material-ui/lab/Skeleton';
-
-
+import { AuthContext } from "../context/AuthContext";
 import { query, where, collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/FirebaseClient';
+import PreviousOrder from './PreviousOrder';
 
 
-export default function ItemList({category}) {
+export default function OrderList(props) {
 
-    const [items, setItems] = useState([]);
+    const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
-    const location = useLocation();
+
+    const authContext = useContext(AuthContext);
+    const userID = authContext.auth.currentUser == null? null : authContext.auth.currentUser.uid;
 
 
     const useStyles = makeStyles({
@@ -32,29 +32,20 @@ export default function ItemList({category}) {
     const classes = useStyles();
         
     useEffect(() => {
-        
 
-        const getItems = async () => {
-            let operator = "==";
-            let searchCat = category;
-            if (!(category != "todas" && category != "")) {
-                operator = "!=";
-                searchCat = "";
-            }
-            const filterQuery = query(collection(db, "productos"), where("category", operator, searchCat));
-            const itemSnapshot = await getDocs(filterQuery);
-
-            let count = 1; //Usado solo para mostrar un contador de items -> orderNum
-            const itemList = itemSnapshot.docs.map(doc => ({id: doc.id, orderNum: count++, ...doc.data()}));
-
-            setItems(itemList);
+        const getOrders = async () => {
+            const filterQuery = query(collection(db, "ordenes"), where("uid", '==', userID));
+            const orderSnapshot = await getDocs(filterQuery);
+            let count = 1; //Usado solo para mostrar un contador de orders -> orderNum
+            const orderList = orderSnapshot.docs.map(doc => ({id: doc.id, orderNum: count++, ...doc.data()}));
+            setOrders(orderList);
             setLoading(false);
         };
 
         setLoading(true);
-        getItems();
+        getOrders();
 
-    }, [location.pathname]);
+    }, []);
 
 
     if (loading) {
@@ -64,14 +55,13 @@ export default function ItemList({category}) {
              <Grid className={classes.root} container spacing={3}>
                 {new Array(12).fill(1).map((item) => (
                 <>
-                <Grid item xs={12} sm={6} md={2} >
-                <Box boxShadow={3} item xs={12} sm={6} md={2}>
-                <Skeleton variant="rect" height={350} />
+                <Grid item xs={12} sm={12} md={12} >
+                <Box boxShadow={3} item xs={12} sm={12} md={12}>
+                <Skeleton variant="rect" height={200} />
                 </Box>
                 </Grid>
                 </>
                 ) )}
-
                  
              </Grid>
             </>    
@@ -80,8 +70,9 @@ export default function ItemList({category}) {
     } else {
         return (
             <>
+                {props.children}
                 <Grid className={classes.root} container spacing={3}>
-                    {items.map((item) => (<Item {...item} />) )}
+                    {orders.map((order) => (<PreviousOrder order={order}/>) )}
                 </Grid>
             </>
         )

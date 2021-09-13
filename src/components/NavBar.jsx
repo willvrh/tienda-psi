@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { makeStyles, AppBar, Toolbar, IconButton, Typography, MenuItem, Menu, Button } from '@material-ui/core';
@@ -7,9 +7,10 @@ import HomeIcon from '@material-ui/icons/Home';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import CartWidget from './CartWidget';
 import OrderSearchPopOver from './OrderSearchPopOver';
+import UserPopOver from './UserPopOver';
 import { collection, getDocs } from 'firebase/firestore';
-import { getData } from '../firebase/FirebaseClient';
-
+import { db } from '../firebase/FirebaseClient';
+import { AuthContext } from '../context/AuthContext';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -57,7 +58,7 @@ export default function NavBar() {
         
 
     const getCategories = async () => {
-      const categoriesCollection = collection(getData(), 'categorias');
+      const categoriesCollection = collection(db, 'categorias');
       const categoriesSnapshot = await getDocs(categoriesCollection);
       setCategories(categoriesSnapshot.docs.map(doc => ({...doc.data()})));
     };
@@ -159,6 +160,7 @@ export default function NavBar() {
           </Link>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+          
           <OrderSearchPopOver/>
             <Button edge="end"
               aria-label="categorías de la tienda"
@@ -171,6 +173,7 @@ export default function NavBar() {
               </Button>
           </div>
           <CartWidget/>
+          <UserPopOver/>
           <div className={classes.sectionMobile}>
             <IconButton
               aria-label="ver más"

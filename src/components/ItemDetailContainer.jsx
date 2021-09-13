@@ -6,7 +6,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import Alert from '@material-ui/lab/Alert';
 
 import { query, where, collection, getDocs } from 'firebase/firestore';
-import { getData } from '../firebase/FirebaseClient';
+import { db } from '../firebase/FirebaseClient';
 
 const useStyles = makeStyles((theme) => ({
     containerBg: {
@@ -39,7 +39,7 @@ export default function ItemDetailContainer (props) {
     useEffect(() => {
 
         const getItem = async () => {
-            const filterQuery = query(collection(getData(), "productos"), where("__name__", "==", itemId));
+            const filterQuery = query(collection(db, "productos"), where("__name__", "==", itemId));
             const itemSnapshot = await getDocs(filterQuery);
             setItem(itemSnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}))[0]);
             setLoading(false);

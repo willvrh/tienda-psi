@@ -1,18 +1,9 @@
 import { React, useState } from 'react';
 import { Link} from 'react-router-dom';
-import { Button, Popover, Typography, makeStyles, TextField} from '@material-ui/core';
+import { Button, Popover, makeStyles, TextField} from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 
-const useStyles = makeStyles((theme) => ({
-  typography: {
-    padding: theme.spacing(2),
-  },
-}));
-
-
 export default function OrderSearchPopOver() {
-    const classes = useStyles();
-
     const [anchorEl, setAnchorEl] = useState(null);
     const [findOrderId, setFindOrderId] = useState('');
   

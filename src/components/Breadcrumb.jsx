@@ -1,4 +1,4 @@
-import React from 'react';
+import { React } from 'react';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Breadcrumbs, Typography, capitalize, makeStyles } from '@material-ui/core';
@@ -8,7 +8,6 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 export default function Breadcrumb() {
     let location = useLocation().pathname;
     const pathArray = location.split("/");
-
 
     const useStyles = makeStyles({
         breadcrumb: {
@@ -21,12 +20,16 @@ export default function Breadcrumb() {
             textDecoration: 'none',
             color: 'black'
         },
+        
     });
     const classes = useStyles();
 
     if (location === "/") {
         return (
+            
             <Breadcrumbs className={classes.breadcrumb} separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
+                
+                
                 <Link color="inherit" className={classes.breadLink}>
                     Categoría
                 </Link>
@@ -85,6 +88,16 @@ export default function Breadcrumb() {
             <Breadcrumbs className={classes.breadcrumb} separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
                 <Link color="inherit" className={classes.breadLink}>
                     Carrito
+                </Link>
+            </Breadcrumbs>
+            );
+    }    
+
+    if (location === "/orders") {
+        return (
+            <Breadcrumbs className={classes.breadcrumb} separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
+                <Link color="inherit" className={classes.breadLink}>
+                    Mis órdenes
                 </Link>
             </Breadcrumbs>
             );

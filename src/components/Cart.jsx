@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Container, makeStyles, Box, List, Typography, Grid, Divider, Button } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import { CartContext } from "../context/CartContext";
+import { AuthContext } from "../context/AuthContext";
 import CartItem from "./CartItem";
 import BuyerForm from "./BuyerForm";
 import Alert from "@material-ui/lab/Alert";
@@ -18,9 +19,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import { query, where, collection, getDocs, setDoc, doc, addDoc, Timestamp } from 'firebase/firestore';
-
-import { getData } from '../firebase/FirebaseClient';
+import { collection, addDoc, Timestamp } from 'firebase/firestore';
+import { db } from '../firebase/FirebaseClient';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -78,6 +78,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Cart(props) {
   const classes = useStyles();
   const cart = useContext(CartContext);
+  const authContext = useContext(AuthContext);
+  const defaultUID = authContext.auth.currentUser == null? null : authContext.auth.currentUser.uid;
 
   const [cartItems, setCartItems] = useState(cart.cart);
   const [formOpen, setFormOpen] = useState(false);
@@ -100,11 +102,12 @@ export default function Cart(props) {
     const order = {
       buyer: buyerData,
       items: cartItems,
+      uid: defaultUID,
       date: Timestamp.fromDate(new Date()),
       total: cart.getCartAmount()
     };
 
-    const orderReference = await addDoc(collection(getData(), "ordenes"), order);
+    const orderReference = await addDoc(collection(db, "ordenes"), order);
     const orderId = orderReference._key.path.segments[1];
     
     setBuyStatus({isFinished: true, orderId: orderId})
@@ -161,6 +164,10 @@ export default function Cart(props) {
                   component="div"
                   className={classes.description}>
                   <Typography className={classes.description} gutterBottom variant="body2">
+                    Comprando como  {authContext.isLoggedIn? <b>{authContext.getUserDisplayName()}</b>:<b>Invitado</b>}
+                  </Typography>
+                  
+                  <Typography className={classes.description} gutterBottom variant="body2">
                     Tenés {cart.getItemCount()} {cart.getItemCount() > 1 ? "items" : "item"} en el carrito.
                   </Typography>
                 </Box>
@@ -188,6 +195,7 @@ export default function Cart(props) {
             onBuyFinish={onBuyFinish}
             creatingOrder={creatingOrder}
             buyStatus={buyStatus}
+            currentUser={authContext.auth.currentUser}
             />
 
           <Dialog 

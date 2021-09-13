@@ -4,7 +4,7 @@ import Carousel from 'react-material-ui-carousel'
 import { Paper, Button, Typography } from '@material-ui/core'
 
 import { collection, getDocs } from 'firebase/firestore';
-import { getData } from '../firebase/FirebaseClient';
+import { db } from '../firebase/FirebaseClient';
 
 
 export default function CarouselContainer() {
@@ -14,7 +14,7 @@ export default function CarouselContainer() {
     useEffect(() => {
 
         const getCategories = async () => {
-          const categoriesCollection = collection(getData(), 'categorias');
+          const categoriesCollection = collection(db, 'categorias');
           const categoriesSnapshot = await getDocs(categoriesCollection);
           setCategories(categoriesSnapshot.docs.map(doc => ({...doc.data()})));
         };

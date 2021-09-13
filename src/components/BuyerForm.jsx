@@ -10,12 +10,15 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
 export default function BuyerForm(props) {
-
+  const defaultName = props.currentUser == null? "" : props.currentUser.displayName;
+  const defaultEmail = props.currentUser == null? "" : props.currentUser.email;
+  
   const [invalidDialog, setInvalidDialog] = useState({open: false, message: ''});
   const [buyerData, setBuyerData] = useState({
-      name: '',
+      name: defaultName,
       phone: '',
-      email: ''
+      email: defaultEmail,
+      repeatEmail: defaultEmail
   })
 
   const handleInputChange = (event) => {
@@ -59,6 +62,7 @@ export default function BuyerForm(props) {
             id="name"
             name="name"
             label="Nombre del comprador"
+            defaultValue={props.currentUser == null? "" : props.currentUser.displayName}
             type="text"
             fullWidth
             onChange={handleInputChange}
@@ -78,6 +82,7 @@ export default function BuyerForm(props) {
             name="email"
             label="Email"
             type="email"
+            defaultValue={props.currentUser == null? "" : props.currentUser.email}
             fullWidth
             onChange={handleInputChange}
           />
@@ -86,6 +91,7 @@ export default function BuyerForm(props) {
             id="repeatEmail"
             name="repeatEmail"
             label="Repetir email"
+            defaultValue={props.currentUser == null? "" : props.currentUser.email}
             type="email"
             fullWidth
             onChange={handleInputChange}
