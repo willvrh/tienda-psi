@@ -2,7 +2,8 @@ import { createContext, useEffect, useState } from "react";
 
 export const CartContext = createContext();
 
-const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || ['']);
+let cartFromLocalStorage = [];
+try { cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || ['']); } catch (e) {}    
 
 const CartContextProvider = ({children}) => {
 

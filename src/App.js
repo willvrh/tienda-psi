@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import { Container }  from '@material-ui/core';
 import CartContextProvider from './context/CartContext';
 import AuthContextProvider from './context/AuthContext';
+import WishlistContextProvider from './context/WishlistContext';
 
 import NavBar from './components/NavBar';
 import Home from './pages/Home';
@@ -22,7 +23,9 @@ function App() {
 
 
   return (
-    <AuthContextProvider>
+    
+      <AuthContextProvider>
+      <WishlistContextProvider>
       <CartContextProvider>
         <Container disableGutters={true} maxWidth='xl'>
           <NavBar/>
@@ -53,6 +56,7 @@ function App() {
           </Switch>
       </Container>
      </CartContextProvider>
+     </WishlistContextProvider>
      </AuthContextProvider>
   );
 }

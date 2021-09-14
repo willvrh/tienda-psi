@@ -18,7 +18,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
 import { db } from '../firebase/FirebaseClient';
 
@@ -163,7 +163,11 @@ export default function Cart(props) {
                   component="div"
                   className={classes.description}>
                   <Typography className={classes.description} gutterBottom variant="body2">
-                    <b>Comprando como:</b>  <br/>{authContext.isLoggedIn()? <>{authContext.getUserDisplayName()}<br/>{authContext.getEmail()}</>:<>Invitado</>}
+                    <b>Comprando como:</b>  <br/>{authContext.isLoggedIn()? <>{authContext.getUserDisplayName()}<br/>{authContext.getEmail()}</>:
+                    <>Invitado 
+                      <Button style={{ marginTop: '12px', }} onClick={ ()=> authContext.loginWithGoogle()}fullWidth variant="outlined">
+                        <LockOpenIcon style={{paddingRight: '10px'}}/>Iniciar sesión con google
+                      </Button></>}
                   </Typography>
                   
                   <Typography className={classes.description} gutterBottom variant="body2">
