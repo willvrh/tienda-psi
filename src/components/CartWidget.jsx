@@ -8,20 +8,16 @@ export default function CartWidget() {
 
     const cart = useContext(CartContext);
     
-    if (cart.getItemCount()>0) {
-        return (
-            <>
-                <Link to={`/cart`} style={{ textDecoration: 'none', color: 'white'}}>
-                    <IconButton aria-label="ver contenido del carrito" color="inherit">
-                    <Badge badgeContent={cart.getItemCount()} color="secondary">
-                        <ShoppingCartIcon />
-                    </Badge>
-                    </IconButton>
-                </Link>
-            </>
-        );
-    } else {
-        return (<></>);
-    }
+    return (
+        <>
+            <Link to={`/cart`} style={{ textDecoration: 'none', color: 'white'}}>
+                <IconButton aria-label="ver contenido del carrito" color="inherit" style={{marginRight: '10px'}}>
+                <Badge badgeContent={cart.getItemCount()} color="secondary">
+                    <ShoppingCartIcon />
+                </Badge>
+                </IconButton>
+            </Link>
+        </>
+    );
     
   }

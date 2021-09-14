@@ -43,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
   description: {
     display: "-webkit-box",
     boxOrient: "vertical",
-    lineClamp: 2,
     wordBreak: "normal",
     overflow: "hidden",
     fontWeight: '500',
@@ -164,7 +163,7 @@ export default function Cart(props) {
                   component="div"
                   className={classes.description}>
                   <Typography className={classes.description} gutterBottom variant="body2">
-                    Comprando como  {authContext.isLoggedIn? <b>{authContext.getUserDisplayName()}</b>:<b>Invitado</b>}
+                    <b>Comprando como:</b>  <br/>{authContext.isLoggedIn()? <>{authContext.getUserDisplayName()}<br/>{authContext.getEmail()}</>:<>Invitado</>}
                   </Typography>
                   
                   <Typography className={classes.description} gutterBottom variant="body2">

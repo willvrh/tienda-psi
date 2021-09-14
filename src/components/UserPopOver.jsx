@@ -1,4 +1,4 @@
-import { React, useState, useContext, useRef } from 'react';
+import { React, useState, useContext, useRef, useEffect } from 'react';
 import { Link} from 'react-router-dom';
 import { Button, Popover, Typography, makeStyles } from '@material-ui/core';
 import { AuthContext } from '../context/AuthContext';
@@ -6,6 +6,7 @@ import Avatar from '@material-ui/core/Avatar';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import LockIcon from '@material-ui/icons/Lock';
 import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const useStyles = makeStyles((theme) => ({
   typography: {
@@ -36,6 +37,9 @@ export default function UserPopOver() {
     const classes = useStyles();
     const authContext = useContext(AuthContext);
     const containerRef = useRef();
+
+   
+
 
     const [anchorEl, setAnchorEl] = useState(null);
   
@@ -112,7 +116,7 @@ export default function UserPopOver() {
               container={containerRef.current}
             >
               <Typography>
-              {authContext.isUserLogged()?
+              {authContext.isLoggedIn()?
                 <>Iniciaste sesión como {authContext.getUserDisplayName()}</>
                :
                <>Clic para iniciar sesión con tu cuenta de Google</>
@@ -133,18 +137,25 @@ export default function UserPopOver() {
               vertical: 'top',
               horizontal: 'center',
             }}
+            container={containerRef.current}
             
           >
             <div style={{padding: '10px'}}>
             <Typography className={classes.username} variant="h6" noWrap>
               {authContext.getUserDisplayName()}
               </Typography>
-              {authContext.isUserLogged()?
+              {authContext.isLoggedIn()?
                 <>
+                <Link to="/wishlist" style={{ textDecoration: 'none', color: 'white', }}>
+                  <Button style={{ width: '100%', marginBottom: '10px'}} variant="contained" color="primary">
+                    <FavoriteIcon style={{paddingRight: '10px'}}/>Mis favoritos
+                  </Button>
+                </Link>
+
                 <Link to="/orders" style={{ textDecoration: 'none', color: 'white', }}>
-                <Button style={{ width: '100%', marginBottom: '10px'}} variant="contained" color="primary">
-                  <PlaylistAddCheckIcon style={{paddingRight: '10px'}}/>Mis órdenes
-                </Button>
+                  <Button style={{ width: '100%', marginBottom: '10px'}} variant="contained" color="primary">
+                    <PlaylistAddCheckIcon style={{paddingRight: '10px'}}/>Mis órdenes
+                  </Button>
                 </Link>
                 <br/>
                 <Button onClick={()=> handleLogout()} style={{ width: '100%'}} variant="contained" color="primary">

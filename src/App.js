@@ -13,6 +13,7 @@ import Product from './pages/Product';
 import Orders from './pages/Orders';
 import ViewCart from './pages/ViewCart';
 import ViewOrder from './pages/ViewOrder';
+import ViewWishlist from './pages/ViewWishlist';
 
 import CarouselContainer from './components/Carousel';
 
@@ -28,23 +29,26 @@ function App() {
           
           <Switch>
             <Route exact path="/">
-            <CarouselContainer/>
-            <Home/>
+              <CarouselContainer/>
+              <Home/>
             </Route>
             <Route exact path="/cart">
-            <ViewCart/>
+              <ViewCart/>
             </Route>
             <Route exact path="/category/:id">
-            <Category/>
+              <Category/>
             </Route>
             <Route exact path="/item/:id/:category" >
-            <Product/>
+              <Product/>
             </Route>
             <Route exact path="/order/:id">
-            <ViewOrder/>
+              <ViewOrder/>
             </Route>
             <Route exact path="/orders">
-            <Orders/>
+              <Orders/>
+            </Route>
+            <Route exact path="/wishlist">
+              <ViewWishlist/>
             </Route>
           </Switch>
       </Container>

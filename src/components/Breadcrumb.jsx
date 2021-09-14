@@ -30,7 +30,7 @@ export default function Breadcrumb() {
             <Breadcrumbs className={classes.breadcrumb} separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
                 
                 
-                <Link color="inherit" className={classes.breadLink}>
+                <Link to="#" color="inherit" className={classes.breadLink}>
                     Categoría
                 </Link>
                 <Link to={`/category/todas`} className={classes.breadLink}>
@@ -44,7 +44,7 @@ export default function Breadcrumb() {
         return (<>
             
             <Breadcrumbs className={classes.breadcrumb} separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
-                <Link color="inherit" className={classes.breadLink}>
+                <Link to="#" color="inherit" className={classes.breadLink}>
                     Categoría
                 </Link>
                 <Link to={`/category/${pathArray[3]}`} className={classes.breadLink}>
@@ -59,7 +59,7 @@ export default function Breadcrumb() {
         return (<>
             
             <Breadcrumbs className={classes.breadcrumb} separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
-                <Link color="inherit" className={classes.breadLink}>
+                <Link to="#" color="inherit" className={classes.breadLink}>
                     Órden
                 </Link>
                 <Link to={`/order/${pathArray[2]}`} className={classes.breadLink}>
@@ -73,7 +73,7 @@ export default function Breadcrumb() {
     if (pathArray[1] === "category") {
         return (
             <Breadcrumbs className={classes.breadcrumb} separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
-                <Link color="inherit" className={classes.breadLink}>
+                <Link to="#" color="inherit" className={classes.breadLink}>
                     Categoría
                 </Link>
                 <Link to={`/category/${pathArray[2]}`} className={classes.breadLink}>
@@ -86,7 +86,7 @@ export default function Breadcrumb() {
     if (location === "/cart") {
         return (
             <Breadcrumbs className={classes.breadcrumb} separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
-                <Link color="inherit" className={classes.breadLink}>
+                <Link to="#" color="inherit" className={classes.breadLink}>
                     Carrito
                 </Link>
             </Breadcrumbs>
@@ -96,8 +96,18 @@ export default function Breadcrumb() {
     if (location === "/orders") {
         return (
             <Breadcrumbs className={classes.breadcrumb} separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
-                <Link color="inherit" className={classes.breadLink}>
+                <Link to="#" color="inherit" className={classes.breadLink}>
                     Mis órdenes
+                </Link>
+            </Breadcrumbs>
+            );
+    }    
+
+    if (location === "/wishlist") {
+        return (
+            <Breadcrumbs className={classes.breadcrumb} separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
+                <Link to="#" color="inherit" className={classes.breadLink}>
+                    Mis favoritos
                 </Link>
             </Breadcrumbs>
             );

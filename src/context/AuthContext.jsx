@@ -7,27 +7,25 @@ const AuthContextProvider = ({children}) => {
     
     const [provider, setProvider] = useState(new GoogleAuthProvider());
     const [auth, setAuth] = useState(getAuth());
-    const [userLogged, setUserLogged] = useState(false);
+    const [user, setUser] = useState(null);
 
+    console.log("user", user)
     useEffect(() => {
-        if (auth.currentUser != null) {
-            setUserLogged(true);
-        } else {
-            setUserLogged(false);
-        }
-        
-    }, [auth])
+            auth.onAuthStateChanged(function(user) {
+            setUser(user);
+        });
+    }, []);
 
     const getAuthObject = () => {
         return auth;
     }
 
-    const isUserLogged = () => {
-        return auth.currentUser != null? true : false;
+    const isLoggedIn = () => {
+        return user!=null;
     }
 
     const getUser = () => {
-        return auth.currentUser;
+        return user;
     }
 
     const getUserDisplayName = () => {
@@ -35,6 +33,13 @@ const AuthContextProvider = ({children}) => {
         auth.currentUser != null ? displayName = auth.currentUser.displayName : displayName = 'Invitado';
         return displayName;
     }
+
+    const getEmail = () => {
+        let email  = ''
+        auth.currentUser != null ? email = auth.currentUser.email : email = '';
+        return email;
+    }
+
     const getUserDisplayNameFirstLetters = () => {
         let letters  = '?'
         if (auth.currentUser != null) {
@@ -50,29 +55,28 @@ const AuthContextProvider = ({children}) => {
     const loginWithGoogle = () => {
         signInWithPopup(auth, provider)
         .then((result) => {
-            setUserLogged(true);
         }).catch((error) => {
-            setUserLogged(false);
         });
     }
 
     const logoutGoogle = () => {
         signOut(auth).then(() => {
-            setUserLogged(false);
       }).catch((error) => {
       });
     }
 
     const contextValues = {
         auth,
+        provider,
+        isLoggedIn,
         getUser,
         loginWithGoogle,
         getUserDisplayName,
         getUserDisplayNameFirstLetters,
         getAuthObject,
         logoutGoogle,
-        userLogged,
-        isUserLogged
+        getEmail
+        
     } 
 
     return ( 

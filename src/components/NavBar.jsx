@@ -97,13 +97,13 @@ export default function NavBar() {
       onClose={handleMenuClose}
     >
       <Link to={`/category/todas`} style={{ textDecoration: 'none', color: 'black', }}>
-        <MenuItem onClick={handleMenuClose}>Todas</MenuItem>
+        <MenuItem key='todas' onClick={handleMenuClose}>Todas</MenuItem>
       </Link>
 
       {categories.map((category) => (
       <>
       <Link to={`/category/${category.shortname}`} style={{ textDecoration: 'none', color: 'black', }}>
-        <MenuItem onClick={handleMenuClose}>{category.name}</MenuItem>
+        <MenuItem key={category.shortname} onClick={handleMenuClose}>{category.name}</MenuItem>
       </Link>
       </>
       ) )}
@@ -123,7 +123,7 @@ export default function NavBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem keyy="categorias" onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
           aria-controls="menu-tienda"
