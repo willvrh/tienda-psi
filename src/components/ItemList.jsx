@@ -81,7 +81,7 @@ export default function ItemList({category}) {
         return (
             <>
                 <Grid className={classes.root} container spacing={3}>
-                    {items.map((item) => (<Item {...item} />) )}
+                    {items.map((item) => (<Item item={item} />) )}
                 </Grid>
             </>
         )

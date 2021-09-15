@@ -12,15 +12,12 @@ export default function CarouselContainer() {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-
         const getCategories = async () => {
           const categoriesCollection = collection(db, 'categorias');
           const categoriesSnapshot = await getDocs(categoriesCollection);
           setCategories(categoriesSnapshot.docs.map(doc => ({...doc.data()})));
         };
-    
         getCategories();
-    
     }, []);
 
     return (

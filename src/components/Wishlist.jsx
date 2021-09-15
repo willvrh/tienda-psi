@@ -1,10 +1,10 @@
 import { React, useContext } from "react";
 import { Link } from 'react-router-dom';
-import { Container, makeStyles, Box, List, Typography, Grid, Divider, Button } from "@material-ui/core";
+import { Container, makeStyles, Box, List, Grid, Divider, Button } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { WishlistContext } from "../context/WishlistContext";
-import CartItem from "./CartItem";
+import WishlistItem from "./WishlistItem";
 import Alert from "@material-ui/lab/Alert";
 import CheckCircleOutlineOutlinedIcon from '@material-ui/icons/CheckCircleOutlineOutlined';
 import ErrorOutlineOutlinedIcon from '@material-ui/icons/ErrorOutlineOutlined';
@@ -70,13 +70,41 @@ export default function Wishlist(props) {
   const authContext = useContext(AuthContext);
   const wishlistContext = useContext(WishlistContext);
 
-  
+  const userID = authContext.auth.currentUser == null? null : authContext.auth.currentUser.uid;
+
+  const [items, setItems] = useState([]);
+
+  const onDelete = (wishItemID) => {
+    wishlistContext.deleteItem(wishItemID).then(value => {
+      getWishlistItems();
+    });
+    
+  }
+
+  const onClear = () => {
+    wishlistContext.clearWishlist().then(value => {
+      getWishlistItems();
+    });
+  }
+
+  const getWishlistItems = async () => {
+    const filterQuery = query(collection(db, "wishlist"), where("uid", '==', userID));
+    const orderSnapshot = await getDocs(filterQuery);
+    let count = 1; //Usado solo para mostrar un contador de orders -> orderNum
+    const itemList = orderSnapshot.docs.map(doc => ({id: doc.id, orderNum: count++, ...doc.data()}));
+    setItems(itemList);
+};
+
+  useEffect(() => {
+    
+    getWishlistItems();
+}, []);
 
   return (
     <>
-      {wishlistContext.wishlistItems.length > 0 ?
+      {items.length > 0 ?
         <Alert icon={<CheckCircleOutlineOutlinedIcon fontSize="inherit" className="pulsatingIcon" />} severity="success">
-          Tenés {wishlistContext.wishlistItems.length} {wishlistContext.wishlistItems.length > 1 ? "items" : "item"} en tu lista de favoritos.
+          Tenés {items.length} {items.length > 1 ? "items" : "item"} en tu lista de favoritos.
         </Alert>
         :
         <Alert icon={<ErrorOutlineOutlinedIcon fontSize="inherit" className="pulsatingIcon" />} severity="error">
@@ -89,7 +117,7 @@ export default function Wishlist(props) {
 
       {props.children}
 
-      {wishlistContext.wishlistItems.length > 0 ?
+      {items.length > 0 ?
 
         <Container className={classes.root}>
 
@@ -98,10 +126,10 @@ export default function Wishlist(props) {
             <Grid item lg={12} md={12} xs={12}>
             <Box boxShadow={3} item lg={8} md={8} xs={12} style={{padding: '15px'}}>
               <List>
-                {wishlistContext.wishlistItems.map((favItem) => (<>{favItem.id}</>))}
+                {items.map((item) => (<><WishlistItem item={item} onDelete={onDelete} /><Divider variant="inset" component="li" /></>))}
               </List>
 
-                <Button style={{ marginTop: '12px' }} fullWidth variant="outlined">
+                <Button style={{ marginTop: '12px' }} onClick={onClear} fullWidth variant="outlined">
                   <HighlightOffIcon style={{color: 'red', marginRight: '15px'}}/> Vaciar lista de favoritos
                 </Button>
               </Box>

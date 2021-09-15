@@ -1,8 +1,10 @@
-import { React, useContext } from "react";
+import { React, useContext, useState } from "react";
 import { Link } from 'react-router-dom';
 import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid, Box, makeStyles, IconButton } from '@material-ui/core';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { AuthContext } from "../context/AuthContext";
+import { WishlistContext } from "../context/WishlistContext";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles({
     root: {
@@ -20,6 +22,11 @@ const useStyles = makeStyles({
         transition: "transform 0.15s ease-in-out",
         "&:hover": { transform: "scale3d(1.3, 1.3, 1)" },
         color: 'gray'
+    },
+    added: {
+        transition: "transform 0.15s ease-in-out",
+        "&:hover": { transform: "scale3d(1.3, 1.3, 1)" },
+        color: 'green'
     },
     media: {
         height: '100%',
@@ -89,34 +96,59 @@ const useStyles = makeStyles({
     }
 });
 
-export default function Item({id, orderNum, title, description, stock, price, pictureUrl, category}) {
+export default function Item(props) {
 
     const classes = useStyles();
+    const item = props.item;
     const authContext = useContext(AuthContext);
+    const wishlistContext = useContext(WishlistContext);
+    const [loadingFavStatus, setLoadingFavStatus] = useState(false);
+    const [isFaved, setIsFaved] = useState({iid: '', faved: false});
+
+    wishlistContext.isFaved(item.id).then(value => setIsFaved(value));
+
+    const handleAddFavorite = () => {
+        setLoadingFavStatus(true);
+        wishlistContext.addItem(item).then((value) => {
+            setLoadingFavStatus(false);
+        })
+    }
+
+    const handleUnfav = () => {
+        setLoadingFavStatus(true);
+        wishlistContext.deleteItem(isFaved.iid).then(value => {
+            setLoadingFavStatus(false);
+            wishlistContext.isFaved(item.id).then(value => setIsFaved(value));
+        });
+    }
 
     return (
         <Grid item xs={12} sm={6} md={2} >
                 <Box boxShadow={3} item xs={12} sm={6} md={2}>
                     <Card className={classes.root}>
-                        
                         <CardActionArea>
-                            <Link title={title} to={`/item/${id}/${category}`} style={{ textDecoration: 'none', color: 'black', }}>
+                            <Link title={item.title} to={`/item/${item.id}/${item.category}`} style={{ textDecoration: 'none', color: 'black', }}>
                             <CardMedia
                                 className={classes.media}
                                 component="img"
-                                alt={title} 
-                                image={pictureUrl}
-                                title={title} 
+                                alt={item.title} 
+                                image={item.pictureUrl}
+                                title={item.title} 
                             />
                             </Link>
                             <CardContent>
                                 <div className={classes.cardContent}>
                                     
                                     <Typography className={classes.priceText} gutterBottom variant="h5" >
-                                        $ {Number(price).toLocaleString('es-AR')}
+                                        $ {Number(item.price).toLocaleString('es-AR')}
                                         <Typography className={classes.idText}>
                                                 {authContext.isLoggedIn()?
-                                                    <FavoriteBorderIcon className={classes.addFav} onClick={() => alert("asd")}/>
+                                                    loadingFavStatus? 
+                                                    <CircularProgress size={20}/>:
+                                                    isFaved.faved?
+                                                    <FavoriteBorderIcon className={classes.added} onClick={handleUnfav} />
+                                                    :
+                                                    <FavoriteBorderIcon className={classes.addFav} onClick={handleAddFavorite}/>
                                                     :
                                                     <FavoriteBorderIcon className={classes.addFavDisabled} onClick={() => authContext.loginWithGoogle()}/>
                                                 }
@@ -124,35 +156,35 @@ export default function Item({id, orderNum, title, description, stock, price, pi
                                         </Typography>
                                     </Typography>
                                     
-                                    <Link title={title} to={`/item/${id}/${category}`} style={{ textDecoration: 'none', color: 'black', }}> 
+                                    <Link title={item.title} to={`/item/${item.id}/${item.category}`} style={{ textDecoration: 'none', color: 'black', }}> 
                                     <Typography className={classes.cardTitle} noWrap gutterBottom variant="body2">
-                                        {title}
+                                        {item.title}
                                     </Typography>
                                     </Link>
            
                                     
                                 </div>
 
-                                <Link title={title} to={`/item/${id}/${category}`} style={{ textDecoration: 'none', color: 'black', }}> 
+                                <Link title={item.title} to={`/item/${item.id}/${item.category}`} style={{ textDecoration: 'none', color: 'black', }}> 
                                 <Box
                                     component="div"
                                     className={classes.categoryBox}>
-                                    ~ {category}
+                                    ~ {item.category}
                                 </Box>
 
                                 <Box
                                     component="div"
                                     className={classes.descriptionBox}>
-                                    {description}
+                                    {item.description}
                                 </Box>
 
                                 <Box
                                     component="div"
                                     className={classes.stockBox}>
-                                    { stock>0 ? (
-                                        <><b className={stock>10 ? classes.available : classes.low}>en stock: </b> <b>{stock}</b> unidades <div style={{float: 'right'}}>#{orderNum}</div></>        
+                                    { item.stock>0 ? (
+                                        <><b className={item.stock>10 ? classes.available : classes.low}>en stock: </b> <b>{item.stock}</b> unidades <div style={{float: 'right'}}>#{item.orderNum}</div></>        
                                     ) : (
-                                        <><b className={classes.notAvailable}>sin stock</b><div style={{float: 'right'}}>#{orderNum}</div></> 
+                                        <><b className={classes.notAvailable}>sin stock</b><div style={{float: 'right'}}>#{item.orderNum}</div></> 
                                     )} 
                                 </Box>
                                 </Link>

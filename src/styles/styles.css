@@ -30,5 +30,11 @@
     50% { transform: scale(1.1); }
   }
 
-
+  .main-footer {
+    color: white;
+    background-color: #2e3b55;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
   

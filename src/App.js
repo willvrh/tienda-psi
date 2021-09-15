@@ -18,7 +18,6 @@ import ViewWishlist from './pages/ViewWishlist';
 
 import CarouselContainer from './components/Carousel';
 
-
 function App() {
 
 
@@ -29,7 +28,6 @@ function App() {
       <CartContextProvider>
         <Container disableGutters={true} maxWidth='xl'>
           <NavBar/>
-          
           <Switch>
             <Route exact path="/">
               <CarouselContainer/>
